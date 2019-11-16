@@ -1,0 +1,1 @@
+INSERT INTO expenditure(amount,expenditure_date_time,tag) VALUES(24.56,'2019-11-12T19:44','food');
