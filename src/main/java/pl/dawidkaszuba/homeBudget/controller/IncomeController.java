@@ -37,7 +37,7 @@ public class IncomeController {
         incomeService.deleteById(id);
     }
 
-    @PutMapping("/incomes/{id}")
+    @PutMapping("/incomes")
     public void edit(@RequestBody Income income){
         incomeService.save(income);
     }

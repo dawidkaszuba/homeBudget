@@ -37,7 +37,7 @@ public class ExpenditureController {
         expenditureService.deleteById(id);
     }
 
-    @PutMapping("/expenditures/{id}")
+    @PutMapping("/expenditures")
     public void edit(@RequestBody Expenditure expenditure){
         expenditureService.save(expenditure);
     }
