@@ -32,17 +32,17 @@ public class ExpenditureController {
         return expenditureService.findById(id);
     }
 
-    @DeleteMapping("/expenditure/{id}")
+    @DeleteMapping("/expenditures/{id}")
     public void deleteById(@PathVariable Long id){
         expenditureService.deleteById(id);
     }
 
-    @PutMapping("/expenditure/{id}")
+    @PutMapping("/expenditures/{id}")
     public void edit(@RequestBody Expenditure expenditure){
         expenditureService.save(expenditure);
     }
 
-    @PostMapping("/expenditure")
+    @PostMapping("/expenditures")
     public void save(@RequestBody Expenditure expenditure){
         expenditureService.save(expenditure);
     }
