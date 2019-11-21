@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 public class Expenditure {
@@ -13,8 +13,9 @@ public class Expenditure {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private double amount;
-    private LocalDateTime expenditureDateTime;
+    private LocalDate expenditureDate;
     private String tag;
+    private String note;
 
     public Expenditure() {
     }
@@ -35,12 +36,12 @@ public class Expenditure {
         this.amount = amount;
     }
 
-    public LocalDateTime getExpenditureDateTime() {
-        return expenditureDateTime;
+    public LocalDate getExpenditureDate() {
+        return expenditureDate;
     }
 
-    public void setExpenditureDateTime(LocalDateTime expenditureDateTime) {
-        this.expenditureDateTime = expenditureDateTime;
+    public void setExpenditureDate(LocalDate expenditureDate) {
+        this.expenditureDate = expenditureDate;
     }
 
     public String getTag() {
@@ -49,5 +50,13 @@ public class Expenditure {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 }

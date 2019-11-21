@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 public class Income {
@@ -13,8 +13,9 @@ public class Income {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private double amount;
-    private LocalDateTime incomeDateTime;
+    private LocalDate incomeDate;
     private String tag;
+    private String note;
 
     public Income() {
     }
@@ -35,12 +36,12 @@ public class Income {
         this.amount = amount;
     }
 
-    public LocalDateTime getIncomeDateTime() {
-        return incomeDateTime;
+    public LocalDate getIncomeDate() {
+        return incomeDate;
     }
 
-    public void setIncomeDateTime(LocalDateTime incomeDateTime) {
-        this.incomeDateTime = incomeDateTime;
+    public void setIncomeDate(LocalDate incomeDate) {
+        this.incomeDate = incomeDate;
     }
 
     public String getTag() {
@@ -49,5 +50,13 @@ public class Income {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 }

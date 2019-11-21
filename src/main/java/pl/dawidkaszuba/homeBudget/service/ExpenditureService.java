@@ -13,6 +13,11 @@ public interface ExpenditureService {
     Optional<Expenditure> findById(Long id);
     void deleteById(Long id);
     void save(Expenditure expenditure);
-
     List<Expenditure> findAllFromTo(String from, String to);
+    List<Expenditure> findByMonth(String month);
+
+    List<Expenditure> findAllByTag(String tag);
+
+    List<Expenditure> findAllForMonthByTag(String month, String tag);
 }
+

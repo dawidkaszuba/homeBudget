@@ -27,9 +27,24 @@ public class ExpenditureController {
         return expenditureService.findAll();
     }
 
-    @GetMapping("foo/{from}/{to}")
-    public List<Expenditure> findAllFromTo(@PathVariable(name = "from") String from, @PathVariable(name = "to") String to){
+    @GetMapping("/expenditures/{from}/{to}")
+    public List<Expenditure> findAllFromTo(@PathVariable String from, @PathVariable String to){
         return expenditureService.findAllFromTo(from,to);
+    }
+
+    @GetMapping("/expenditures/month/{month}")
+    public List<Expenditure> findAllForMonth(@PathVariable String month){
+        return expenditureService.findByMonth(month);
+    }
+
+    @GetMapping("/expenditures/tag/{tag}")
+    public List<Expenditure> findAllByTag(@PathVariable String tag){
+        return expenditureService.findAllByTag(tag);
+    }
+
+    @GetMapping("/expenditures/month/{month}/tag/{tag}")
+    public List<Expenditure> findAllForMonthByTag(@PathVariable String month, @PathVariable String tag){
+        return expenditureService.findAllForMonthByTag(month,tag);
     }
 
     @GetMapping("/expenditures/{id}")

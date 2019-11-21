@@ -40,6 +40,21 @@ public class ExpenditureServiceImpl implements ExpenditureService {
     }
 
     @Override
+    public List<Expenditure> findAllForMonthByTag(String month, String tag) {
+        return expenditureRepository.findAllForMonthByTag(month,tag);
+    }
+
+    @Override
+    public List<Expenditure> findAllByTag(String tag) {
+        return expenditureRepository.findAllByTag(tag);
+    }
+
+    @Override
+    public List<Expenditure> findByMonth(String month) {
+        return expenditureRepository.findByMonth(month);
+    }
+
+    @Override
     public List<Expenditure> findAllFromTo(String from,String to) {
         return expenditureRepository.findAllFromTo(from,to);
     }
