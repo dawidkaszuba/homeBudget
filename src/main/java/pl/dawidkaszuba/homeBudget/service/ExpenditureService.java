@@ -13,4 +13,6 @@ public interface ExpenditureService {
     Optional<Expenditure> findById(Long id);
     void deleteById(Long id);
     void save(Expenditure expenditure);
+
+    List<Expenditure> findAllFromTo(String from, String to);
 }

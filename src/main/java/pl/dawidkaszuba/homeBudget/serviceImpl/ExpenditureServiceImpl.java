@@ -38,4 +38,9 @@ public class ExpenditureServiceImpl implements ExpenditureService {
     public void save(Expenditure expenditure) {
         expenditureRepository.save(expenditure);
     }
+
+    @Override
+    public List<Expenditure> findAllFromTo(String from,String to) {
+        return expenditureRepository.findAllFromTo(from,to);
+    }
 }

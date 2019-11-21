@@ -27,6 +27,11 @@ public class ExpenditureController {
         return expenditureService.findAll();
     }
 
+    @GetMapping("foo/{from}/{to}")
+    public List<Expenditure> findAllFromTo(@PathVariable(name = "from") String from, @PathVariable(name = "to") String to){
+        return expenditureService.findAllFromTo(from,to);
+    }
+
     @GetMapping("/expenditures/{id}")
     public Optional<Expenditure> findById(@PathVariable Long id){
         return expenditureService.findById(id);
