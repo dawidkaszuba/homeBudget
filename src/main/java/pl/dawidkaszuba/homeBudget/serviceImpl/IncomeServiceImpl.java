@@ -6,6 +6,7 @@ import pl.dawidkaszuba.homeBudget.entity.Income;
 import pl.dawidkaszuba.homeBudget.repository.IncomeRepository;
 import pl.dawidkaszuba.homeBudget.service.IncomeService;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +38,11 @@ public class IncomeServiceImpl implements IncomeService {
     @Override
     public List<Income> findAllFromTo(String from, String to) {
         return incomeRepository.findAllFromTo(from,to);
+    }
+
+    @Override
+    public BigDecimal findSumAmountFromTo(String from, String to) {
+        return incomeRepository.findSumAmountFromTo(from, to);
     }
 
     @Override

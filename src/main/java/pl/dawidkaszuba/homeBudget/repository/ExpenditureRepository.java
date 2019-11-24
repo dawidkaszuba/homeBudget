@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import pl.dawidkaszuba.homeBudget.entity.Expenditure;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
@@ -17,4 +18,7 @@ public interface ExpenditureRepository extends JpaRepository<Expenditure, Long> 
 
     @Query(value = "select * from EXPENDITURE where EXPENDITURE_DATE between ?1 and ?2 and tag = ?3",nativeQuery = true)
     List<Expenditure> findAllByTag(String month, String to, String tag);
+
+    @Query(value = "select sum(amount) from EXPENDITURE where EXPENDITURE_DATE between ?1 and ?2", nativeQuery = true)
+    BigDecimal findSumAmountFromTo(String from, String to);
 }

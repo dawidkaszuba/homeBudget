@@ -3,6 +3,7 @@ package pl.dawidkaszuba.homeBudget.service;
 import org.springframework.stereotype.Service;
 import pl.dawidkaszuba.homeBudget.entity.Income;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,4 +16,7 @@ public interface IncomeService {
     void save(Income income);
 
     List<Income> findAllFromTo(String from, String to);
+
+    BigDecimal findSumAmountFromTo(String from, String to);
 }
+

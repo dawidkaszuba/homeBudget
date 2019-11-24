@@ -3,6 +3,7 @@ package pl.dawidkaszuba.homeBudget.service;
 import org.springframework.stereotype.Service;
 import pl.dawidkaszuba.homeBudget.entity.Expenditure;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,5 +19,7 @@ public interface ExpenditureService {
     List<Expenditure> findAllByTag(String tag);
 
     List<Expenditure> findAllByTagFromTo(String from, String to, String tag);
+
+    BigDecimal findSumAmountFromTo(String from, String to);
 }
 

@@ -6,6 +6,7 @@ import pl.dawidkaszuba.homeBudget.entity.Expenditure;
 import pl.dawidkaszuba.homeBudget.repository.ExpenditureRepository;
 import pl.dawidkaszuba.homeBudget.service.ExpenditureService;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +38,11 @@ public class ExpenditureServiceImpl implements ExpenditureService {
     @Override
     public void save(Expenditure expenditure) {
         expenditureRepository.save(expenditure);
+    }
+
+    @Override
+    public BigDecimal findSumAmountFromTo(String from, String to) {
+        return expenditureRepository.findSumAmountFromTo(from, to);
     }
 
     @Override
