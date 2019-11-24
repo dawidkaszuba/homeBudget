@@ -13,4 +13,6 @@ public interface IncomeService {
     Optional<Income> findById(Long id);
     void deleteById(Long id);
     void save(Income income);
+
+    List<Income> findAllFromTo(String from, String to);
 }

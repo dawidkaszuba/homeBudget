@@ -23,9 +23,18 @@ public class IncomeController {
 
 
     @GetMapping("/incomes")
-    public List<Income> findAll(){
-        return incomeService.findAll();
+    public List<Income> findAll(@RequestParam(required = false) String from, @RequestParam(required = false) String to){
+        if(from == null || to == null) {
+
+            return incomeService.findAll();
+
+        } else {
+
+            return incomeService.findAllFromTo(from,to);
+
+        }
     }
+
 
     @GetMapping("/incomes/{id}")
     public Optional<Income> findById(@PathVariable Long id){

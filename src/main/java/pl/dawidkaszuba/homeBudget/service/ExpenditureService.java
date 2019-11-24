@@ -14,10 +14,9 @@ public interface ExpenditureService {
     void deleteById(Long id);
     void save(Expenditure expenditure);
     List<Expenditure> findAllFromTo(String from, String to);
-    List<Expenditure> findByMonth(String month);
 
     List<Expenditure> findAllByTag(String tag);
 
-    List<Expenditure> findAllForMonthByTag(String month, String tag);
+    List<Expenditure> findAllByTagFromTo(String from, String to, String tag);
 }
 

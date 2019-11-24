@@ -21,30 +21,32 @@ public class ExpenditureController {
         this.expenditureService = expenditureService;
     }
 
-
     @GetMapping("/expenditures")
-    public List<Expenditure> findAll(){
-        return expenditureService.findAll();
-    }
+    public List<Expenditure> findAll(@RequestParam(required = false) String from, @RequestParam(required = false) String to){
+        if(from == null || to == null) {
 
-    @GetMapping("/expenditures/{from}/{to}")
-    public List<Expenditure> findAllFromTo(@PathVariable String from, @PathVariable String to){
-        return expenditureService.findAllFromTo(from,to);
-    }
+            return expenditureService.findAll();
 
-    @GetMapping("/expenditures/month/{month}")
-    public List<Expenditure> findAllForMonth(@PathVariable String month){
-        return expenditureService.findByMonth(month);
+        } else {
+
+            return expenditureService.findAllFromTo(from,to);
+
+        }
     }
 
     @GetMapping("/expenditures/tag/{tag}")
-    public List<Expenditure> findAllByTag(@PathVariable String tag){
-        return expenditureService.findAllByTag(tag);
-    }
+    public List<Expenditure> findAllByTagFromTo(@RequestParam(required = false) String from,
+                                                @RequestParam(required = false) String to,
+                                                @PathVariable(required = false) String tag){
 
-    @GetMapping("/expenditures/month/{month}/tag/{tag}")
-    public List<Expenditure> findAllForMonthByTag(@PathVariable String month, @PathVariable String tag){
-        return expenditureService.findAllForMonthByTag(month,tag);
+        if(from == null || to == null){
+
+            return expenditureService.findAllByTag(tag);
+
+        }else{
+
+            return expenditureService.findAllByTagFromTo(from,to,tag);
+        }
     }
 
     @GetMapping("/expenditures/{id}")

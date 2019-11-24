@@ -40,8 +40,8 @@ public class ExpenditureServiceImpl implements ExpenditureService {
     }
 
     @Override
-    public List<Expenditure> findAllForMonthByTag(String month, String tag) {
-        return expenditureRepository.findAllForMonthByTag(month,tag);
+    public List<Expenditure> findAllByTagFromTo(String from, String to,String tag) {
+        return expenditureRepository.findAllByTag(from,to,tag);
     }
 
     @Override
@@ -49,10 +49,6 @@ public class ExpenditureServiceImpl implements ExpenditureService {
         return expenditureRepository.findAllByTag(tag);
     }
 
-    @Override
-    public List<Expenditure> findByMonth(String month) {
-        return expenditureRepository.findByMonth(month);
-    }
 
     @Override
     public List<Expenditure> findAllFromTo(String from,String to) {

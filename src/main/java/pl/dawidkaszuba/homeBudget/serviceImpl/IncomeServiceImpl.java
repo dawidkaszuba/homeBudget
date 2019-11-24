@@ -35,6 +35,11 @@ public class IncomeServiceImpl implements IncomeService {
     }
 
     @Override
+    public List<Income> findAllFromTo(String from, String to) {
+        return incomeRepository.findAllFromTo(from,to);
+    }
+
+    @Override
     public void save(Income income) {
         incomeRepository.save(income);
     }
