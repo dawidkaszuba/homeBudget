@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.dawidkaszuba.homeBudget.entity.Income;
+import pl.dawidkaszuba.homeBudget.exception.IncomeNotFoundException;
 import pl.dawidkaszuba.homeBudget.service.IncomeService;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -38,9 +40,14 @@ public class IncomeController {
         }
     }
 
-
     @GetMapping("/incomes/{id}")
     public Optional<Income> findById(@PathVariable Long id){
+
+        Optional<Income> income = incomeService.findById(id);
+
+        if(!income.isPresent()){
+            throw new IncomeNotFoundException("id-"+ id);
+        }
         return incomeService.findById(id);
     }
 
@@ -55,7 +62,7 @@ public class IncomeController {
     }
 
     @PostMapping("/incomes")
-    public ResponseEntity<Object> save(@RequestBody Income income){
+    public ResponseEntity<Object> save(@Valid @RequestBody Income income){
 
         incomeService.save(income);
 

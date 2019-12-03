@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -15,6 +16,7 @@ public class Income {
     private Long id;
     private BigDecimal amount;
     private LocalDate incomeDate;
+    @Size(min = 2,message = "tag should have atleast 2 signs")
     private String tag;
     private String note;
 
