@@ -46,7 +46,8 @@ public class IncomeServiceImpl implements IncomeService {
     }
 
     @Override
-    public void save(Income income) {
+    public Income save(Income income) {
         incomeRepository.save(income);
+        return incomeRepository.save(income);
     }
 }

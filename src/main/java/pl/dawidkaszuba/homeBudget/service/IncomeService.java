@@ -13,7 +13,7 @@ public interface IncomeService {
     List<Income> findAll();
     Optional<Income> findById(Long id);
     void deleteById(Long id);
-    void save(Income income);
+    Income save(Income income);
 
     List<Income> findAllFromTo(String from, String to);
 

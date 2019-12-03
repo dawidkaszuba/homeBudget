@@ -10,14 +10,12 @@ import pl.dawidkaszuba.homeBudget.service.IncomeService;
 @Service
 public class BalanceServiceImpl implements BalanceService {
 
-    @Autowired
+
     private final Balance balance;
-    @Autowired
     private final IncomeService incomeService;
-    @Autowired
     private final ExpenditureService expenditureService;
 
-
+    @Autowired
     public BalanceServiceImpl(Balance balance, IncomeService incomeService, ExpenditureService expenditureService) {
         this.balance = balance;
         this.incomeService = incomeService;

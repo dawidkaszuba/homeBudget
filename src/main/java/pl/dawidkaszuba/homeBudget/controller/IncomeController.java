@@ -2,11 +2,14 @@ package pl.dawidkaszuba.homeBudget.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.dawidkaszuba.homeBudget.entity.Income;
 import pl.dawidkaszuba.homeBudget.service.IncomeService;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,7 +55,15 @@ public class IncomeController {
     }
 
     @PostMapping("/incomes")
-    public void save(@RequestBody Income income){
+    public ResponseEntity<Object> save(@RequestBody Income income){
+
         incomeService.save(income);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(incomeService.save(income).getId()).toUri();
+
+        return ResponseEntity.created(location).build();
     }
 }
