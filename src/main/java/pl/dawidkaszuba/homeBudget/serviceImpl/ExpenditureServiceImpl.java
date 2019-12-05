@@ -36,8 +36,8 @@ public class ExpenditureServiceImpl implements ExpenditureService {
     }
 
     @Override
-    public void save(Expenditure expenditure) {
-        expenditureRepository.save(expenditure);
+    public Expenditure save(Expenditure expenditure) {
+        return expenditureRepository.save(expenditure);
     }
 
     @Override

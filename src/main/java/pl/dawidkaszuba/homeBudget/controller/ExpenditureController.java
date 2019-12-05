@@ -1,11 +1,15 @@
 package pl.dawidkaszuba.homeBudget.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.dawidkaszuba.homeBudget.entity.Expenditure;
 import pl.dawidkaszuba.homeBudget.service.ExpenditureService;
 
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,8 +69,14 @@ public class ExpenditureController {
     }
 
     @PostMapping("/expenditures")
-    public void save(@RequestBody Expenditure expenditure){
-        expenditureService.save(expenditure);
+    public ResponseEntity<Object> save(@Valid @RequestBody Expenditure expenditure){
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(expenditureService.save(expenditure).getId()).toUri();
+
+        return ResponseEntity.created(location).build();
     }
 
 
