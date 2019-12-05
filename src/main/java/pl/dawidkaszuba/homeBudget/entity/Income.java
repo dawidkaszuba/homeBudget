@@ -1,5 +1,7 @@
 package pl.dawidkaszuba.homeBudget.entity;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +18,8 @@ public class Income {
     private Long id;
     private BigDecimal amount;
     private LocalDate incomeDate;
-    @Size(min = 2,message = "tag should have atleast 2 signs")
+    @Size(min = 2,message = "tag should have at least 2 signs")
+    @ApiModelProperty(notes = "tag should have at least 2 signs")
     private String tag;
     private String note;
 
