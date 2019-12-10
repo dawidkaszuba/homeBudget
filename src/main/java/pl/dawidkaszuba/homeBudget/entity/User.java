@@ -1,13 +1,12 @@
 package pl.dawidkaszuba.homeBudget.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Entity
-@Table(name="USERS")
 public class User {
 
     @Id
@@ -24,12 +23,17 @@ public class User {
     @NotEmpty
     private String name;
 
+    @OneToMany
+    private List<Income> incomes;
 
-    @Column(columnDefinition="char(3)")
-    @Type(type="yes_no")
-    @NotEmpty
-    private boolean admin;
+    @OneToMany
+    private List<Expenditure> expenditures;
 
+    @OneToMany
+    private List<Tag> tags;
+
+    public User() {
+    }
 
     public Long getId() {
         return id;
@@ -63,11 +67,27 @@ public class User {
         this.name = name;
     }
 
-    public boolean isAdmin() {
-        return admin;
+    public List<Income> getIncomes() {
+        return incomes;
     }
 
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
+    public void setIncomes(List<Income> incomes) {
+        this.incomes = incomes;
+    }
+
+    public List<Expenditure> getExpenditures() {
+        return expenditures;
+    }
+
+    public void setExpenditures(List<Expenditure> expenditures) {
+        this.expenditures = expenditures;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 }

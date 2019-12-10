@@ -1,9 +1,7 @@
 package pl.dawidkaszuba.homeBudget.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Tag {
@@ -12,6 +10,12 @@ public class Tag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @ManyToOne
+    private User user;
+    @ManyToMany
+    private List<Income> income;
+    @ManyToMany
+    private List<Expenditure> expenditure;
 
     public Tag() {
     }
@@ -30,5 +34,29 @@ public class Tag {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Income> getIncome() {
+        return income;
+    }
+
+    public void setIncome(List<Income> income) {
+        this.income = income;
+    }
+
+    public List<Expenditure> getExpenditure() {
+        return expenditure;
+    }
+
+    public void setExpenditure(List<Expenditure> expenditure) {
+        this.expenditure = expenditure;
     }
 }

@@ -2,14 +2,12 @@ package pl.dawidkaszuba.homeBudget.entity;
 
 import io.swagger.annotations.ApiModelProperty;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Income {
@@ -24,8 +22,11 @@ public class Income {
     @Size(min = 2,message = "tag should have at least 2 signs")
     @NotNull
     @ApiModelProperty(notes = "tag should have at least 2 signs")
-    private String tag;
+    @ManyToMany
+    private List<Tag> tags;
     private String note;
+    @ManyToOne
+    private User user;
 
     public Income() {
     }
@@ -54,12 +55,12 @@ public class Income {
         this.incomeDate = incomeDate;
     }
 
-    public String getTag() {
-        return tag;
+    public List<Tag> getTags() {
+        return tags;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 
     public String getNote() {
@@ -68,5 +69,13 @@ public class Income {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

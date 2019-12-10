@@ -630,3 +630,23 @@ select * from expenditure where MONTH(expenditure_date)=9 [42122-199]
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.lang.Thread.run(Thread.java:748)
+2019-12-10 21:44:08 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "DESC[*] USERS "; oczekiwano "DELETE, DROP, DECLARE, DEALLOCATE"
+Syntax error in SQL statement "DESC[*] USERS "; expected "DELETE, DROP, DECLARE, DEALLOCATE"; SQL statement:
+desc users [42001-199]
+2019-12-10 21:44:20 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "DESCRICE[*] USERS "; oczekiwano "DELETE, DROP, DECLARE, DEALLOCATE"
+Syntax error in SQL statement "DESCRICE[*] USERS "; expected "DELETE, DROP, DECLARE, DEALLOCATE"; SQL statement:
+descrice users [42001-199]
+2019-12-10 21:44:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "DESCRIBE[*] USERS "; oczekiwano "DELETE, DROP, DECLARE, DEALLOCATE"
+Syntax error in SQL statement "DESCRIBE[*] USERS "; expected "DELETE, DROP, DECLARE, DEALLOCATE"; SQL statement:
+describe users [42001-199]
+2019-12-10 21:44:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "DESCRIBE[*] USERS "; oczekiwano "DELETE, DROP, DECLARE, DEALLOCATE"
+Syntax error in SQL statement "DESCRIBE[*] USERS "; expected "DELETE, DROP, DECLARE, DEALLOCATE"; SQL statement:
+describe users [42001-199]
+2019-12-10 22:11:53 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "USER" nie istnieje
+Table "USER" not found; SQL statement:
+select * from user [42102-199]

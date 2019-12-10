@@ -1,11 +1,9 @@
 package pl.dawidkaszuba.homeBudget.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Expenditure {
@@ -15,8 +13,12 @@ public class Expenditure {
     private Long id;
     private BigDecimal amount;
     private LocalDate expenditureDate;
-    private String tag;
+    @ManyToMany()
+    private List<Tag> tags;
     private String note;
+    @ManyToOne
+    private User user;
+
 
     public Expenditure() {
     }
@@ -45,12 +47,12 @@ public class Expenditure {
         this.expenditureDate = expenditureDate;
     }
 
-    public String getTag() {
-        return tag;
+    public List<Tag> getTags() {
+        return tags;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 
     public String getNote() {
@@ -59,5 +61,13 @@ public class Expenditure {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

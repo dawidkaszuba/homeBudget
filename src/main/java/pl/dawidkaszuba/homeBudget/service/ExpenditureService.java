@@ -18,7 +18,7 @@ public interface ExpenditureService {
 
     List<Expenditure> findAllByTag(String tag);
 
-    List<Expenditure> findAllByTagFromTo(String from, String to, String tag);
+ //   List<Expenditure> findAllByTagFromTo(String from, String to, String tagId);
 
     BigDecimal findSumAmountFromTo(String from, String to);
 }
