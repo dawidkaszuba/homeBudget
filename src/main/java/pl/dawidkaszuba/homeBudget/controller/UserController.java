@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.dawidkaszuba.homeBudget.entity.User;
+import pl.dawidkaszuba.homeBudget.exception.UserNotFoundException;
 import pl.dawidkaszuba.homeBudget.service.UserService;
 
 import java.net.URI;
@@ -32,6 +33,14 @@ public class UserController {
 
     @GetMapping("/users/{id}")
     public Optional<User> findById(@PathVariable Long id){
+
+        Optional<User> optionalUser = userService.findById(id);
+
+        if(!optionalUser.isPresent()){
+
+            throw new UserNotFoundException("id-" + id);
+        }
+
         return userService.findById(id);
     }
 

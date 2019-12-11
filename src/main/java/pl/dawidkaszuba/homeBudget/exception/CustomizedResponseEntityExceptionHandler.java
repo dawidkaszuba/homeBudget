@@ -42,6 +42,24 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 
         return  new ResponseEntity(exceptionResponse, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public final ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException ex, WebRequest webRequest){
+
+        ExceptionResponse exceptionResponse =
+                new ExceptionResponse(new Date(),ex.getMessage(),webRequest.getDescription(false));
+
+        return  new ResponseEntity(exceptionResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(TagNotFoundException.class)
+    public final ResponseEntity<Object> handleTagNotFoundException(TagNotFoundException ex, WebRequest webRequest){
+
+        ExceptionResponse exceptionResponse =
+                new ExceptionResponse(new Date(),ex.getMessage(),webRequest.getDescription(false));
+
+        return  new ResponseEntity(exceptionResponse, HttpStatus.NOT_FOUND);
+    }
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
                                                                   HttpHeaders headers, HttpStatus status,

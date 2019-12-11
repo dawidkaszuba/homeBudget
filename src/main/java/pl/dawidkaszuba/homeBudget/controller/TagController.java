@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.dawidkaszuba.homeBudget.entity.Tag;
+import pl.dawidkaszuba.homeBudget.exception.TagNotFoundException;
 import pl.dawidkaszuba.homeBudget.service.TagService;
 
 import java.util.List;
@@ -27,6 +28,13 @@ public class TagController {
 
     @GetMapping("/tags/{id}")
     public Optional<Tag> findById(@PathVariable Long id) {
+
+        Optional<Tag> optionalTag = tagService.findbyId(id);
+
+        if(!optionalTag.isPresent()) {
+            throw new TagNotFoundException("id-" + id);
+        }
+
         return tagService.findbyId(id);
     }
 
