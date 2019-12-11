@@ -38,20 +38,20 @@ public class ExpenditureController {
         }
     }
 
-//    @GetMapping("/expenditures/tag/{tag}")
-//    public List<Expenditure> findAllByTagFromTo(@RequestParam(required = false) String from,
-//                                                @RequestParam(required = false) String to,
-//                                                @PathVariable(required = false) String tagId){
-//
-//        if(from == null || to == null){
-//
-//            return expenditureService.findAllByTag(tagId);
-//
-//        }else{
-//
-//            return expenditureService.findAllByTagFromTo(from,to,tagId);
-//        }
-//    }
+    @GetMapping("/expenditures/tag/{tag}")
+    public List<Expenditure> findAllByTagFromTo(@RequestParam(required = false) String from,
+                                                @RequestParam(required = false) String to,
+                                                @PathVariable(required = false) String tagId){
+
+        if(from == null || to == null){
+
+            return expenditureService.findAllByTag(tagId);
+
+        }else{
+
+            return expenditureService.findAllByTagFromTo(from,to,tagId);
+        }
+    }
 
     @GetMapping("/expenditures/{id}")
     public Optional<Expenditure> findById(@PathVariable Long id){
