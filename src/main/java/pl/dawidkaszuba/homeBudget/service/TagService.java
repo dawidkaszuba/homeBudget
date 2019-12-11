@@ -12,5 +12,5 @@ public interface TagService {
     List<Tag> findall();
     Optional<Tag> findbyId(Long id);
     void deleteById(Long id);
-    void save(Tag tag);
+    Tag save(Tag tag);
 }

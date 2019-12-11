@@ -1,12 +1,15 @@
 package pl.dawidkaszuba.homeBudget.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.dawidkaszuba.homeBudget.entity.Tag;
 import pl.dawidkaszuba.homeBudget.exception.TagNotFoundException;
 import pl.dawidkaszuba.homeBudget.service.TagService;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,7 +52,16 @@ public class TagController {
     }
 
     @PostMapping("/tags")
-    public void save(@RequestBody Tag tag) {
+    public ResponseEntity<Object> save(@RequestBody Tag tag) {
+
         tagService.save(tag);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(tagService.save(tag).getId()).toUri();
+
+        return ResponseEntity.created(location).build();
+
     }
 }

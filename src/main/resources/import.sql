@@ -6,7 +6,7 @@ insert into user ( user_name, password, name) values ( 'clarabelle', '$2a$10$cuT
 insert into user ( user_name, password, name) values ('admin', '$2a$10$JQOfG5Tqnf97SbGcKsalz.XpDQbXi1APOf2SHPVW27bWNioi9nI8y', 'Super');
 
 
-INSERT INTO tag(name) VALUES('food');
+INSERT INTO tag(name,user_id) VALUES('food',1);
 INSERT INTO tag(name) VALUES('clothes');
 INSERT INTO tag(name) VALUES('bus tickets');
 INSERT INTO tag(name) VALUES('kindergarten');
