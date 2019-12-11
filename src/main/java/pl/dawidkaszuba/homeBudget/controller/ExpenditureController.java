@@ -25,31 +25,34 @@ public class ExpenditureController {
         this.expenditureService = expenditureService;
     }
 
-    @GetMapping("/expenditures")
-    public List<Expenditure> findAll(@RequestParam(required = false) String from, @RequestParam(required = false) String to){
+    @GetMapping("/users/{userId}/expenditures")
+    public List<Expenditure> findAll(@RequestParam(required = false) String from,
+                                     @RequestParam(required = false) String to,
+                                     @PathVariable String userId){
         if(from == null || to == null) {
 
             return expenditureService.findAll();
 
         } else {
 
-            return expenditureService.findAllFromTo(from,to);
+            return expenditureService.findAllFromTo(userId,from,to);
 
         }
     }
 
-    @GetMapping("/expenditures/tag/{tag}")
+    @GetMapping("/users/{userId}/expenditures/tags/{tagId}")
     public List<Expenditure> findAllByTagFromTo(@RequestParam(required = false) String from,
                                                 @RequestParam(required = false) String to,
-                                                @PathVariable(required = false) String tagId){
+                                                @PathVariable String tagId,
+                                                @PathVariable String userId){
 
         if(from == null || to == null){
 
-            return expenditureService.findAllByTag(tagId);
+            return expenditureService.findAllByTagFromTo(userId,from,to,tagId);
 
         }else{
 
-            return expenditureService.findAllByTagFromTo(from,to,tagId);
+            return expenditureService.findAllByTagFromTo(userId,from,to,tagId);
         }
     }
 
