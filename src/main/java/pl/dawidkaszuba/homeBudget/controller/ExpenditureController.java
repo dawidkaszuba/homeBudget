@@ -52,7 +52,7 @@ public class ExpenditureController {
 
         }else{
 
-            return expenditureService.findAllByTagFromTo(userId,from,to,tagId);
+            return expenditureService.findAllByTag(userId,tagId);
         }
     }
 

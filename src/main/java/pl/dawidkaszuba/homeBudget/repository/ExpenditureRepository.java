@@ -20,4 +20,7 @@ public interface ExpenditureRepository extends JpaRepository<Expenditure, Long> 
 
     @Query(value = "select sum(amount) from EXPENDITURE where EXPENDITURE_DATE between ?2 and ?3 and user_id = ?1", nativeQuery = true)
     BigDecimal findSumAmountFromTo(String userId,String from, String to);
+
+    @Query(value="select * from expenditure join expenditure_tags on  expenditure.id = expenditure_tags.expenditure_id where expenditure.user_id = :userId and expenditure_tags.tags_id=:tagId", nativeQuery = true)
+    List<Expenditure> findAllByTag(@Param("userId") String userId, @Param("tagId") String tagId);
 }

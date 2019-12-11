@@ -46,6 +46,11 @@ public class ExpenditureServiceImpl implements ExpenditureService {
     }
 
     @Override
+    public List<Expenditure> findAllByTag(String userId, String tagId) {
+        return expenditureRepository.findAllByTag(userId,tagId);
+    }
+
+    @Override
     public List<Expenditure> findAllByTagFromTo(String userId,String from, String to,String tagId) {
         return expenditureRepository.findAllByTagFromTo(userId,from,to,tagId);
     }
