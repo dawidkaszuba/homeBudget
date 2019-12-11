@@ -13,14 +13,17 @@ INSERT INTO tag(name) VALUES('kindergarten');
 INSERT INTO tag(name) VALUES('salary');
 
 
-INSERT INTO expenditure(amount,expenditure_date) VALUES(24.56,'2019-11-12');
-INSERT INTO expenditure(amount,expenditure_date,note) VALUES(99.99,'2019-11-10','jacket');
-INSERT INTO expenditure(amount,expenditure_date,note) VALUES(52.39,'2019-11-15','fruit for birthday');
-INSERT INTO income(amount,income_date) VALUES(2500.00,'2019-11-10');
-INSERT INTO income(amount,income_date) VALUES(2600.00,'2019-10-10');
+INSERT INTO expenditure(amount,expenditure_date,user_id) VALUES(24.56,'2019-11-12',1);
+INSERT INTO expenditure(amount,expenditure_date,note,user_id) VALUES(99.99,'2019-11-10','jacket',1);
+INSERT INTO expenditure(amount,expenditure_date,note,user_id) VALUES(52.39,'2019-11-15','fruit for birthday',2);
+
+INSERT INTO income(amount,income_date,user_id) VALUES(2500.00,'2019-11-10',1);
+INSERT INTO income(amount,income_date,user_id) VALUES(2600.00,'2019-10-10',2);
+
 
 INSERT into expenditure_tags(expenditure_id,tags_id) VALUES(1,1);
 INSERT into expenditure_tags(expenditure_id,tags_id) VALUES(2,2);
 INSERT into expenditure_tags(expenditure_id,tags_id) VALUES(3,1);
 INSERT into income_tags(income_id,tags_id) VALUES(1,5);
 INSERT into income_tags(income_id,tags_id) VALUES(2,5);
+

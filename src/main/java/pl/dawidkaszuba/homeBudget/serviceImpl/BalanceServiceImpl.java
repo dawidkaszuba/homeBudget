@@ -7,6 +7,8 @@ import pl.dawidkaszuba.homeBudget.service.BalanceService;
 import pl.dawidkaszuba.homeBudget.service.ExpenditureService;
 import pl.dawidkaszuba.homeBudget.service.IncomeService;
 
+import java.math.BigDecimal;
+
 @Service
 public class BalanceServiceImpl implements BalanceService {
 
@@ -23,9 +25,22 @@ public class BalanceServiceImpl implements BalanceService {
     }
 
     @Override
-    public Balance getBalance(String from, String to) {
+    public Balance getBalance(String userId, String from, String to) {
 
-        balance.setValue(incomeService.findSumAmountFromTo(from,to).subtract(expenditureService.findSumAmountFromTo(from,to)));
+
+        BigDecimal incomes = incomeService.findSumAmountFromTo(userId,from,to);
+        BigDecimal expenditures = expenditureService.findSumAmountFromTo(userId,from,to);
+
+        if(incomes == null )
+
+            incomes = new BigDecimal(0.00);
+
+        if(expenditures == null)
+
+            expenditures = new BigDecimal(0.00);
+
+
+          balance.setValue(incomes.subtract(expenditures));
 
         return balance;
     }

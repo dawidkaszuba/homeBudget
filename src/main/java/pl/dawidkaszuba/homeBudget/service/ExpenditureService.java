@@ -20,6 +20,6 @@ public interface ExpenditureService {
 
     List<Expenditure> findAllByTagFromTo(String from, String to, String tagId);
 
-    BigDecimal findSumAmountFromTo(String from, String to);
+    BigDecimal findSumAmountFromTo(String userId, String from, String to);
 }
 

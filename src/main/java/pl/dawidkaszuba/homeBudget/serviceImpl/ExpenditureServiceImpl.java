@@ -41,8 +41,8 @@ public class ExpenditureServiceImpl implements ExpenditureService {
     }
 
     @Override
-    public BigDecimal findSumAmountFromTo(String from, String to) {
-        return expenditureRepository.findSumAmountFromTo(from, to);
+    public BigDecimal findSumAmountFromTo(String userId,String from, String to) {
+        return expenditureRepository.findSumAmountFromTo(userId,from, to);
     }
 
     @Override

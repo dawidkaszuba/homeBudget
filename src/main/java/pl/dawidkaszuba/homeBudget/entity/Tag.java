@@ -1,7 +1,6 @@
 package pl.dawidkaszuba.homeBudget.entity;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Tag {
@@ -12,10 +11,7 @@ public class Tag {
     private String name;
     @ManyToOne
     private User user;
-    @ManyToMany
-    private List<Income> income;
-    @ManyToMany
-    private List<Expenditure> expenditure;
+
 
     public Tag() {
     }
@@ -44,19 +40,4 @@ public class Tag {
         this.user = user;
     }
 
-    public List<Income> getIncome() {
-        return income;
-    }
-
-    public void setIncome(List<Income> income) {
-        this.income = income;
-    }
-
-    public List<Expenditure> getExpenditure() {
-        return expenditure;
-    }
-
-    public void setExpenditure(List<Expenditure> expenditure) {
-        this.expenditure = expenditure;
-    }
 }

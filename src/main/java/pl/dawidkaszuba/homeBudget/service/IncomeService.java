@@ -17,6 +17,6 @@ public interface IncomeService {
 
     List<Income> findAllFromTo(String from, String to);
 
-    BigDecimal findSumAmountFromTo(String from, String to);
+    BigDecimal findSumAmountFromTo(String userId,String from, String to);
 }
 

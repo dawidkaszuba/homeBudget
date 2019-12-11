@@ -6,5 +6,5 @@ import pl.dawidkaszuba.homeBudget.model.Balance;
 @Service
 public interface BalanceService {
 
-    Balance getBalance(String from, String to);
+    Balance getBalance(String userId,String from, String to);
 }

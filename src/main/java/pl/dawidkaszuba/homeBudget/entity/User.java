@@ -2,9 +2,11 @@ package pl.dawidkaszuba.homeBudget.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
-import java.util.List;
 
 @Entity
 public class User {
@@ -23,14 +25,6 @@ public class User {
     @NotEmpty
     private String name;
 
-    @OneToMany
-    private List<Income> incomes;
-
-    @OneToMany
-    private List<Expenditure> expenditures;
-
-    @OneToMany
-    private List<Tag> tags;
 
     public User() {
     }
@@ -67,27 +61,4 @@ public class User {
         this.name = name;
     }
 
-    public List<Income> getIncomes() {
-        return incomes;
-    }
-
-    public void setIncomes(List<Income> incomes) {
-        this.incomes = incomes;
-    }
-
-    public List<Expenditure> getExpenditures() {
-        return expenditures;
-    }
-
-    public void setExpenditures(List<Expenditure> expenditures) {
-        this.expenditures = expenditures;
-    }
-
-    public List<Tag> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<Tag> tags) {
-        this.tags = tags;
-    }
 }

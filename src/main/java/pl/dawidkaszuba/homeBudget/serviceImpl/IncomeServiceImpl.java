@@ -41,8 +41,8 @@ public class IncomeServiceImpl implements IncomeService {
     }
 
     @Override
-    public BigDecimal findSumAmountFromTo(String from, String to) {
-        return incomeRepository.findSumAmountFromTo(from, to);
+    public BigDecimal findSumAmountFromTo(String userId,String from, String to) {
+        return incomeRepository.findSumAmountFromTo(userId,from, to);
     }
 
     @Override
