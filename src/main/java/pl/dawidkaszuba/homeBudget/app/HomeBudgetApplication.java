@@ -16,4 +16,6 @@ public class HomeBudgetApplication {
 		SpringApplication.run(HomeBudgetApplication.class, args);
 	}
 
+
+
 }

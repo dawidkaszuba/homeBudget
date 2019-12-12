@@ -11,9 +11,11 @@ import java.util.Optional;
 public interface ExpenditureService {
 
     List<Expenditure> findAll();
-    Optional<Expenditure> findById(Long id);
-    void deleteById(Long id);
+
+    Optional<Expenditure> findById(Long userId,Long id);
+
     Expenditure save(Expenditure expenditure);
+
     List<Expenditure> findAllFromTo(String userId,String from, String to);
 
     List<Expenditure> findAllByTagFromTo(String userId,String from, String to, String tagId);
@@ -21,6 +23,8 @@ public interface ExpenditureService {
     BigDecimal findSumAmountFromTo(String userId, String from, String to);
 
     List<Expenditure> findAllByTag(String userId, String tagId);
+
+    void deleteById(Long id);
 }
 
 

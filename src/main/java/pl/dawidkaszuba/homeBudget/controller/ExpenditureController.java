@@ -29,6 +29,7 @@ public class ExpenditureController {
     public List<Expenditure> findAll(@RequestParam(required = false) String from,
                                      @RequestParam(required = false) String to,
                                      @PathVariable String userId){
+
         if(from == null || to == null) {
 
             return expenditureService.findAll();
@@ -36,7 +37,6 @@ public class ExpenditureController {
         } else {
 
             return expenditureService.findAllFromTo(userId,from,to);
-
         }
     }
 
@@ -45,7 +45,7 @@ public class ExpenditureController {
                                                 @RequestParam(required = false) String to,
                                                 @PathVariable String tagId,
                                                 @PathVariable String userId){
-
+//todo:  it isn't working fine - to correct
         if(from == null || to == null){
 
             return expenditureService.findAllByTagFromTo(userId,from,to,tagId);
@@ -56,14 +56,17 @@ public class ExpenditureController {
         }
     }
 
-    @GetMapping("/expenditures/{id}")
-    public Optional<Expenditure> findById(@PathVariable Long id){
-        return expenditureService.findById(id);
+    @GetMapping("/users/{userId}/expenditures/{expenditureId}")
+    public Optional<Expenditure> findById(@PathVariable Long expenditureId,
+                                          @PathVariable Long userId){
+        return expenditureService.findById(userId,expenditureId);
     }
-
-    @DeleteMapping("/expenditures/{id}")
-    public void deleteById(@PathVariable Long id){
-        expenditureService.deleteById(id);
+    //todo
+    // param: "userId" is ignored. Custom deleting method with two parameters (userId and expenditureId) doesn't work
+    @DeleteMapping("/users/{userId}/expenditures/{expenditureId}")
+    public void deleteById(@PathVariable Long expenditureId,
+                           @PathVariable Long userId){
+        expenditureService.deleteById(expenditureId);
     }
 
     @PutMapping("/expenditures")
@@ -81,6 +84,5 @@ public class ExpenditureController {
 
         return ResponseEntity.created(location).build();
     }
-
 
 }

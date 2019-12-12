@@ -13,7 +13,7 @@ public class Expenditure {
     private Long id;
     private BigDecimal amount;
     private LocalDate expenditureDate;
-    @ManyToMany()
+    @ManyToMany
     private List<Tag> tags;
     private String note;
     @ManyToOne
