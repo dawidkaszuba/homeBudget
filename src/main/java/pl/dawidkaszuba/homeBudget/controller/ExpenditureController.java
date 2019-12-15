@@ -14,6 +14,7 @@ import pl.dawidkaszuba.homeBudget.service.UserService;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,17 +36,30 @@ public class ExpenditureController {
     @GetMapping("/users/{userId}/expenditures")
     public List<Expenditure> findAll(@RequestParam(required = false) String from,
                                      @RequestParam(required = false) String to,
-                                     @PathVariable String userId){
+                                     @PathVariable Long userId){
 
+        Optional<User> optionalUser = userService.findById(userId);
 
-        if(from == null || to == null) {
+        if (!optionalUser.isPresent()) {
 
-            return expenditureService.findAll();
+            throw new UserNotFoundException("id-"+userId);
 
-        } else {
+        }else{
 
-            return expenditureService.findAllFromTo(userId,from,to);
+            if(from == null || to == null) {
+
+                return expenditureService.findAllByUserId(userId);
+
+            }else {
+
+                LocalDate localDateFrom = LocalDate.parse(from);
+                LocalDate localDateTo = LocalDate.parse(to);
+
+                return expenditureService.findAllByUserIdAndExpenditureDateBetween(userId,localDateFrom,localDateTo);
+            }
+
         }
+
     }
 
     @GetMapping("/users/{userId}/expenditures/tags/{tagId}")
@@ -90,7 +104,7 @@ public class ExpenditureController {
 
                 } else {
 
-                    throw new ExpenditureNotFoundException("No expenditures with id-" + expenditureId +
+                    throw new ExpenditureNotFoundException("No expenditure with id-" + expenditureId +
                             " for user with id-" + userId);
                 }
 

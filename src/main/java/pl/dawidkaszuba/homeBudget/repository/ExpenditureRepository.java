@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import pl.dawidkaszuba.homeBudget.entity.Expenditure;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -26,6 +27,9 @@ public interface ExpenditureRepository extends JpaRepository<Expenditure, Long> 
 
     void deleteById(Long id);
 
+    List<Expenditure> findAllByUserId(Long userId);
+
+    List<Expenditure> findAllByUserIdAndExpenditureDateBetween(Long userId, LocalDate from, LocalDate to);
 
 
 }

@@ -63,15 +63,39 @@ public class IncomeController {
 
     }
 
-    @GetMapping("/incomes/{id}")
-    public Optional<Income> findById(@PathVariable Long id){
+    @GetMapping("/users/{userId}/incomes/{incomeId}")
+    public Optional<Income> findById(@PathVariable Long incomeId,
+                                     @PathVariable Long userId){
 
-        Optional<Income> income = incomeService.findById(id);
+        Optional<User> optionalUser = userService.findById(userId);
 
-        if(!income.isPresent()){
-            throw new IncomeNotFoundException("id-"+ id);
+        if(!optionalUser.isPresent()) {
+
+            throw new UserNotFoundException("id-"+userId);
+
+        }else {
+
+            Optional<Income> optionalIncome = incomeService.findById(incomeId);
+
+            if(!optionalIncome.isPresent()){
+
+                throw new IncomeNotFoundException("id-"+ incomeId);
+
+            }else{
+
+                if(optionalIncome.get().getUser().getId().equals(optionalUser.get().getId())){
+
+                    return incomeService.findById(incomeId);
+
+                }else {
+
+                    throw new IncomeNotFoundException("No income with id-" + incomeId +
+                            " for user with id-" + userId);
+                }
+            }
+
         }
-        return incomeService.findById(id);
+
     }
 
     @DeleteMapping("/incomes/{id}")

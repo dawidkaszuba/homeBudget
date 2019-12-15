@@ -7,6 +7,7 @@ import pl.dawidkaszuba.homeBudget.repository.ExpenditureRepository;
 import pl.dawidkaszuba.homeBudget.service.ExpenditureService;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,6 +57,15 @@ public class ExpenditureServiceImpl implements ExpenditureService {
         return expenditureRepository.findAllFromTo(userId,from,to);
     }
 
+    @Override
+    public List<Expenditure> findAllByUserIdAndExpenditureDateBetween(Long userId, LocalDate from, LocalDate to) {
+        return expenditureRepository.findAllByUserIdAndExpenditureDateBetween(userId,from,to);
+    }
+
+    @Override
+    public List<Expenditure> findAllByUserId(Long userId) {
+        return expenditureRepository.findAllByUserId(userId);
+    }
 
     @Override
     public void deleteById(Long id) {
