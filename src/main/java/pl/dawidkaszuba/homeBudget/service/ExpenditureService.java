@@ -12,7 +12,7 @@ public interface ExpenditureService {
 
     List<Expenditure> findAll();
 
-    Optional<Expenditure> findById(Long userId,Long id);
+    Optional<Expenditure> findById(Long id);
 
     Expenditure save(Expenditure expenditure);
 
@@ -25,6 +25,8 @@ public interface ExpenditureService {
     List<Expenditure> findAllByTag(String userId, String tagId);
 
     void deleteById(Long id);
+
 }
+
 
 

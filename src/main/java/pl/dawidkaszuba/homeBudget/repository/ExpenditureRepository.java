@@ -8,7 +8,6 @@ import pl.dawidkaszuba.homeBudget.entity.Expenditure;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface ExpenditureRepository extends JpaRepository<Expenditure, Long> {
@@ -25,9 +24,8 @@ public interface ExpenditureRepository extends JpaRepository<Expenditure, Long> 
     @Query(value="select * from expenditure join expenditure_tags on  expenditure.id = expenditure_tags.expenditure_id where expenditure.user_id = :userId and expenditure_tags.tags_id=:tagId", nativeQuery = true)
     List<Expenditure> findAllByTag(@Param("userId") String userId, @Param("tagId") String tagId);
 
-    @Query(value= "select * from expenditure where expenditure.user_id = :userId and expenditure.id = :expenditureId",nativeQuery = true)
-    Optional<Expenditure> findById(@Param("userId") Long userId, @Param("expenditureId") Long expenditureId );
-
     void deleteById(Long id);
+
+
 
 }

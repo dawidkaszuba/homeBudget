@@ -7,6 +7,7 @@ import pl.dawidkaszuba.homeBudget.repository.IncomeRepository;
 import pl.dawidkaszuba.homeBudget.service.IncomeService;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,14 +32,20 @@ public class IncomeServiceImpl implements IncomeService {
     }
 
     @Override
+    public List<Income> findAllByUserIdAndIncomeDateBetween(Long userId,LocalDate from, LocalDate to) {
+        return incomeRepository.findAllByUserIdAndIncomeDateBetween(userId,from,to);
+    }
+
+    @Override
+    public List<Income> findAllByUserId(Long userId) {
+        return incomeRepository.findAllByUserId(userId);
+    }
+
+    @Override
     public void deleteById(Long id) {
         incomeRepository.deleteById(id);
     }
 
-    @Override
-    public List<Income> findAllFromTo(String from, String to) {
-        return incomeRepository.findAllFromTo(from,to);
-    }
 
     @Override
     public BigDecimal findSumAmountFromTo(String userId,String from, String to) {

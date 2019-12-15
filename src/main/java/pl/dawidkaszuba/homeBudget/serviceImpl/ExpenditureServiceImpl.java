@@ -26,8 +26,8 @@ public class ExpenditureServiceImpl implements ExpenditureService {
     }
 
     @Override
-    public Optional<Expenditure> findById(Long userId,Long id) {
-        return expenditureRepository.findById(userId,id);
+    public Optional<Expenditure> findById(Long id) {
+        return expenditureRepository.findById(id);
     }
 
     @Override
@@ -55,6 +55,7 @@ public class ExpenditureServiceImpl implements ExpenditureService {
     public List<Expenditure> findAllFromTo(String userId,String from,String to) {
         return expenditureRepository.findAllFromTo(userId,from,to);
     }
+
 
     @Override
     public void deleteById(Long id) {

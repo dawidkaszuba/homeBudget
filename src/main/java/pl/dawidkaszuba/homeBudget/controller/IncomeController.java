@@ -7,11 +7,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.dawidkaszuba.homeBudget.entity.Income;
+import pl.dawidkaszuba.homeBudget.entity.User;
 import pl.dawidkaszuba.homeBudget.exception.IncomeNotFoundException;
+import pl.dawidkaszuba.homeBudget.exception.UserNotFoundException;
 import pl.dawidkaszuba.homeBudget.service.IncomeService;
+import pl.dawidkaszuba.homeBudget.service.UserService;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,24 +24,43 @@ import java.util.Optional;
 public class IncomeController {
 
     private final IncomeService incomeService;
+    private final UserService userService;
 
     @Autowired
-    public IncomeController(IncomeService incomeService) {
+    public IncomeController(IncomeService incomeService, UserService userService) {
         this.incomeService = incomeService;
+        this.userService=userService;
     }
 
 
-    @GetMapping("/incomes")
-    public List<Income> findAll(@RequestParam(required = false) String from, @RequestParam(required = false) String to){
-        if(from == null || to == null) {
+    @GetMapping("/users/{userId}/incomes")
+    public List<Income> findAll(@RequestParam(required = false) String from,
+                                @RequestParam(required = false) String to,
+                                @PathVariable Long userId){
 
-            return incomeService.findAll();
+        Optional<User> optionalUser = userService.findById(userId);
 
-        } else {
+        if (!optionalUser.isPresent()) {
 
-            return incomeService.findAllFromTo(from,to);
+            throw  new UserNotFoundException("id-"+userId);
+
+        }else{
+
+            if (from == null || to == null) {
+
+                return incomeService.findAllByUserId(userId);
+
+            } else {
+
+                LocalDate localDateFrom = LocalDate.parse(from);
+                LocalDate localDateTo = LocalDate.parse(to);
+
+                return incomeService.findAllByUserIdAndIncomeDateBetween(userId,localDateFrom, localDateTo);
+
+            }
 
         }
+
     }
 
     @GetMapping("/incomes/{id}")

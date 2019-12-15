@@ -6,7 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.dawidkaszuba.homeBudget.entity.Expenditure;
+import pl.dawidkaszuba.homeBudget.entity.User;
+import pl.dawidkaszuba.homeBudget.exception.ExpenditureNotFoundException;
+import pl.dawidkaszuba.homeBudget.exception.UserNotFoundException;
 import pl.dawidkaszuba.homeBudget.service.ExpenditureService;
+import pl.dawidkaszuba.homeBudget.service.UserService;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -19,16 +23,20 @@ public class ExpenditureController {
 
 
     private final ExpenditureService expenditureService;
+    private final UserService userService;
 
     @Autowired
-    public ExpenditureController(ExpenditureService expenditureService) {
+    public ExpenditureController(ExpenditureService expenditureService,
+                                 UserService userService) {
         this.expenditureService = expenditureService;
+        this.userService=userService;
     }
 
     @GetMapping("/users/{userId}/expenditures")
     public List<Expenditure> findAll(@RequestParam(required = false) String from,
                                      @RequestParam(required = false) String to,
                                      @PathVariable String userId){
+
 
         if(from == null || to == null) {
 
@@ -45,37 +53,117 @@ public class ExpenditureController {
                                                 @RequestParam(required = false) String to,
                                                 @PathVariable String tagId,
                                                 @PathVariable String userId){
-//todo:  it isn't working fine - to correct
+
         if(from == null || to == null){
 
-            return expenditureService.findAllByTagFromTo(userId,from,to,tagId);
+            return expenditureService.findAllByTag(userId,tagId);
 
         }else{
 
-            return expenditureService.findAllByTag(userId,tagId);
+            return expenditureService.findAllByTagFromTo(userId,from,to,tagId);
         }
     }
 
     @GetMapping("/users/{userId}/expenditures/{expenditureId}")
     public Optional<Expenditure> findById(@PathVariable Long expenditureId,
-                                          @PathVariable Long userId){
-        return expenditureService.findById(userId,expenditureId);
+                                          @PathVariable Long userId) {
+
+        Optional<User> optionalUser = userService.findById(userId);
+
+        if (!optionalUser.isPresent()) {
+
+            throw new UserNotFoundException("id-" + userId);
+
+        } else {
+
+            Optional<Expenditure> optionalExpenditure = expenditureService.findById(expenditureId);
+
+            if (!optionalExpenditure.isPresent()) {
+
+                throw new ExpenditureNotFoundException("id-" + expenditureId);
+
+            } else {
+
+                if (optionalExpenditure.get().getUser().getId().equals(optionalUser.get().getId())) {
+
+                    return expenditureService.findById(expenditureId);
+
+                } else {
+
+                    throw new ExpenditureNotFoundException("No expenditures with id-" + expenditureId +
+                            " for user with id-" + userId);
+                }
+
+            }
+
+        }
+
+
     }
-    //todo
-    // param: "userId" is ignored. Custom deleting method with two parameters (userId and expenditureId) doesn't work
+
     @DeleteMapping("/users/{userId}/expenditures/{expenditureId}")
     public void deleteById(@PathVariable Long expenditureId,
                            @PathVariable Long userId){
-        expenditureService.deleteById(expenditureId);
+
+        Optional<User> optionalUser = userService.findById(userId);
+
+        if(!optionalUser.isPresent()) {
+
+            throw new UserNotFoundException("id-" + userId);
+
+        }else {
+
+            Optional<Expenditure> optionalExpenditure = expenditureService.findById(expenditureId);
+
+            if(!optionalExpenditure.isPresent()){
+
+                throw new ExpenditureNotFoundException("id-" + expenditureId);
+
+            }else {
+
+                if(optionalExpenditure.get().getUser().getId().equals(optionalUser.get().getId())) {
+
+                    expenditureService.deleteById(optionalExpenditure.get().getId());
+
+                }else {
+
+                    throw new ExpenditureNotFoundException("No expenditures with id-" + expenditureId +
+                            " for user with id-" + userId);
+                }
+            }
+        }
     }
 
-    @PutMapping("/expenditures")
-    public void edit(@RequestBody Expenditure expenditure){
-        expenditureService.save(expenditure);
+    @PutMapping("/users/{userId}/expenditures")
+    public void edit(@RequestBody Expenditure expenditure,
+                     @PathVariable Long userId){
+
+        Optional<User> optionalUser = userService.findById(userId);
+
+        if(!optionalUser.isPresent()){
+
+            throw new UserNotFoundException("id-"+userId);
+
+        }else{
+
+            expenditureService.save(expenditure);
+        }
     }
 
-    @PostMapping("/expenditures")
-    public ResponseEntity<Object> save(@Valid @RequestBody Expenditure expenditure){
+    @PostMapping("/users/{userId}/expenditures")
+    public ResponseEntity<Object> save(@Valid @RequestBody Expenditure expenditure,
+                                       @PathVariable Long userId){
+
+        Optional<User> optionalUser = userService.findById(userId);
+
+        if(!optionalUser.isPresent()){
+
+            throw new UserNotFoundException("id-" + userId);
+
+        }else {
+
+            expenditure.setUser(optionalUser.get());
+        }
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
