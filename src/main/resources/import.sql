@@ -11,6 +11,8 @@ INSERT INTO tag(name,user_id) VALUES('clothes',1);
 INSERT INTO tag(name,user_id) VALUES('bus tickets',1);
 INSERT INTO tag(name,user_id) VALUES('kindergarten',1);
 INSERT INTO tag(name,user_id) VALUES('salary',1);
+INSERT INTO tag(name,user_id) VALUES('my_salary',2);
+INSERT INTO tag(name,user_id) VALUES('petrol',2);
 
 
 INSERT INTO expenditure(amount,expenditure_date,user_id) VALUES(24.56,'2019-11-12',1);

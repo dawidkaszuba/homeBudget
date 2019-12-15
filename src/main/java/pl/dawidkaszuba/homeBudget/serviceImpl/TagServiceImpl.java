@@ -21,13 +21,13 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public List<Tag> findall() {
-        return tagRepository.findAll();
+    public Optional<Tag> findbyId(Long id) {
+        return tagRepository.findById(id);
     }
 
     @Override
-    public Optional<Tag> findbyId(Long id) {
-        return tagRepository.findById(id);
+    public List<Tag> findAllByUserId(Long userId) {
+        return tagRepository.findByUserId(userId);
     }
 
     @Override

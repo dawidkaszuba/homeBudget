@@ -9,8 +9,9 @@ import java.util.Optional;
 @Service
 public interface TagService {
 
-    List<Tag> findall();
     Optional<Tag> findbyId(Long id);
     void deleteById(Long id);
     Tag save(Tag tag);
+    List<Tag> findAllByUserId(Long userId);
+
 }

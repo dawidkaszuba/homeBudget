@@ -6,8 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.dawidkaszuba.homeBudget.entity.Tag;
+import pl.dawidkaszuba.homeBudget.entity.User;
 import pl.dawidkaszuba.homeBudget.exception.TagNotFoundException;
+import pl.dawidkaszuba.homeBudget.exception.UserNotFoundException;
 import pl.dawidkaszuba.homeBudget.service.TagService;
+import pl.dawidkaszuba.homeBudget.service.UserService;
 
 import java.net.URI;
 import java.util.List;
@@ -18,27 +21,57 @@ import java.util.Optional;
 public class TagController {
 
     private final TagService tagService;
+    private final UserService userService;
 
     @Autowired
-    public TagController(TagService tagService) {
+    public TagController(TagService tagService,UserService userService) {
         this.tagService = tagService;
+        this.userService = userService;
     }
 
-    @GetMapping("/tags")
-    public List<Tag> findAll(){
-        return tagService.findall();
-    }
+    @GetMapping("/users/{userId}/tags")
+    public List<Tag> findAll(@PathVariable Long userId){
 
-    @GetMapping("/tags/{id}")
-    public Optional<Tag> findById(@PathVariable Long id) {
+        Optional<User> optionalUser = userService.findById(userId);
 
-        Optional<Tag> optionalTag = tagService.findbyId(id);
+        if (!optionalUser.isPresent()) {
 
-        if(!optionalTag.isPresent()) {
-            throw new TagNotFoundException("id-" + id);
+            throw new UserNotFoundException("id-" + userId);
+
+        }else{
+
+            return tagService.findAllByUserId(userId);
         }
+    }
 
-        return tagService.findbyId(id);
+    @GetMapping("/users/{userId}/tags/{tagId}")
+    public Optional<Tag> findById(@PathVariable Long tagId,
+                                  @PathVariable Long userId) {
+
+        Optional<User> optionalUser = userService.findById(userId);
+
+        if (!optionalUser.isPresent()) {
+
+            throw new UserNotFoundException("id-" + userId);
+        }else{
+
+            Optional<Tag> optionalTag = tagService.findbyId(tagId);
+
+            if(!optionalTag.isPresent()) {
+
+                throw new TagNotFoundException("id-" + tagId);
+            }else{
+
+                if(optionalTag.get().getUser().getId().equals(optionalUser.get().getId())){
+
+                    return tagService.findbyId(tagId);
+                }else {
+
+                    throw new TagNotFoundException("No tag with id-" + tagId +
+                            " for user with id-" + userId);
+                }
+            }
+        }
     }
 
     @DeleteMapping("/tags/{id}")
