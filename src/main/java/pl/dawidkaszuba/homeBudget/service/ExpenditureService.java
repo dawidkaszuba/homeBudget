@@ -11,13 +11,9 @@ import java.util.Optional;
 @Service
 public interface ExpenditureService {
 
-    List<Expenditure> findAll();
-
     Optional<Expenditure> findById(Long id);
 
     Expenditure save(Expenditure expenditure);
-
-    List<Expenditure> findAllFromTo(String userId,String from, String to);
 
     List<Expenditure> findAllByTagFromTo(String userId,String from, String to, String tagId);
 
