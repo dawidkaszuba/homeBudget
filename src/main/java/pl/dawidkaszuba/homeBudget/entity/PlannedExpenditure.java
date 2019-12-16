@@ -1,9 +1,6 @@
 package pl.dawidkaszuba.homeBudget.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -16,6 +13,7 @@ public class PlannedExpenditure {
     private Long id;
     private String name;
     private String note;
+    @OneToMany
     private List<Expenditure> expenditures;
     private BigDecimal currentSumAmount;
     private BigDecimal plannedAmount;

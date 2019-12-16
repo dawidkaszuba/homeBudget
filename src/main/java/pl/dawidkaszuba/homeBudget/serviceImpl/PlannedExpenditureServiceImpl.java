@@ -5,7 +5,6 @@ import pl.dawidkaszuba.homeBudget.entity.PlannedExpenditure;
 import pl.dawidkaszuba.homeBudget.repository.PlannedExpenditureRepository;
 import pl.dawidkaszuba.homeBudget.service.PlannedExpenditureService;
 
-import java.util.List;
 import java.util.Optional;
 
 public class PlannedExpenditureServiceImpl implements PlannedExpenditureService {
@@ -33,8 +32,4 @@ public class PlannedExpenditureServiceImpl implements PlannedExpenditureService 
         return plannedExpenditureRepository.save(plannedExpenditure);
     }
 
-    @Override
-    public List<PlannedExpenditure> findAllByUserId(Long userId) {
-        return plannedExpenditureRepository.findAllByUserId(userId);
-    }
 }
