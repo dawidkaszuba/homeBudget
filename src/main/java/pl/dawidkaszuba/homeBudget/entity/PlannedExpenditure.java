@@ -17,13 +17,16 @@ public class PlannedExpenditure {
     private String name;
     private String note;
     private List<Expenditure> expenditures;
-    private BigDecimal sumAmount;
+    private BigDecimal currentSumAmount;
     private BigDecimal plannedAmount;
     private LocalDate startDate;
     private LocalDate endDate;
+    private boolean isSumAmountExceeded;
+
 
     public PlannedExpenditure() {
     }
+
 
     public Long getId() {
         return id;
@@ -57,12 +60,12 @@ public class PlannedExpenditure {
         this.expenditures = expenditures;
     }
 
-    public BigDecimal getSumAmount() {
-        return sumAmount;
+    public BigDecimal getCurrentSumAmount() {
+        return currentSumAmount;
     }
 
-    public void setSumAmount(BigDecimal sumAmount) {
-        this.sumAmount = sumAmount;
+    public void setCurrentSumAmount(BigDecimal currentSumAmount) {
+        this.currentSumAmount = currentSumAmount;
     }
 
     public BigDecimal getPlannedAmount() {
@@ -73,6 +76,14 @@ public class PlannedExpenditure {
         this.plannedAmount = plannedAmount;
     }
 
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
     public LocalDate getEndDate() {
         return endDate;
     }
@@ -81,11 +92,11 @@ public class PlannedExpenditure {
         this.endDate = endDate;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
+    public boolean isSumAmountExceeded() {
+        return isSumAmountExceeded;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
+    public void setSumAmountExceeded(boolean sumAmountExceeded) {
+        isSumAmountExceeded = sumAmountExceeded;
     }
 }
