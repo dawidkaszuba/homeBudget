@@ -98,20 +98,70 @@ public class IncomeController {
 
     }
 
-    @DeleteMapping("/incomes/{id}")
-    public void deleteById(@PathVariable Long id){
-        incomeService.deleteById(id);
+    @DeleteMapping("/users/{userId}/incomes/{incomeId}")
+    public void deleteById(@PathVariable Long incomeId,
+                           @PathVariable Long userId){
+
+        Optional<User> optionalUser = userService.findById(userId);
+
+        if(!optionalUser.isPresent()) {
+
+            throw new UserNotFoundException("id-" + userId);
+
+        }else {
+
+            Optional<Income> optionalIncome = incomeService.findById(incomeId);
+
+            if (!optionalIncome.isPresent()) {
+
+                throw new IncomeNotFoundException("id-" + incomeId);
+
+            }else {
+
+                if(optionalIncome.get().getUser().getId().equals(optionalUser.get().getId())) {
+
+                    incomeService.deleteById(incomeId);
+
+                }else {
+
+                    throw new IncomeNotFoundException("No income with id-" + incomeId +
+                            " for user with id-" + userId);
+                }
+            }
+        }
+
     }
 
-    @PutMapping("/incomes")
-    public void edit(@RequestBody Income income){
-        incomeService.save(income);
+    @PutMapping("/users/{userId}/incomes")
+    public void edit(@RequestBody Income income,
+                     @PathVariable Long userId){
+
+        Optional<User> optionalUser = userService.findById(userId);
+
+        if(!optionalUser.isPresent()) {
+
+            throw new UserNotFoundException("id-" + userId);
+
+        }else {
+
+            incomeService.save(income);
+        }
     }
 
-    @PostMapping("/incomes")
-    public ResponseEntity<Object> save(@Valid @RequestBody Income income){
+    @PostMapping("/users/{userId}/incomes")
+    public ResponseEntity<Object> save(@Valid @RequestBody Income income,
+                                       @PathVariable Long userId){
 
-        incomeService.save(income);
+        Optional<User> optionalUser = userService.findById(userId);
+
+        if (!optionalUser.isPresent()) {
+
+            throw new UserNotFoundException("id-" + userId);
+
+        }else {
+
+            incomeService.save(income);
+        }
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()

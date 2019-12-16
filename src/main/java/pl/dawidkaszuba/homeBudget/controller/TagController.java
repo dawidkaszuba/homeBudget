@@ -73,21 +73,75 @@ public class TagController {
             }
         }
     }
+//todo: throws 500 Internal Server Error because "nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement"
+    // tags are related with expenditure_tags and income_tags tables
+    @DeleteMapping("/users/{userId}/tags/{tagId}")
+    public void deleteById(@PathVariable Long tagId,
+                           @PathVariable Long userId){
 
-    @DeleteMapping("/tags/{id}")
-    public void deleteById(@PathVariable Long id){
-        tagService.deleteById(id);
+        Optional<User> optionalUser = userService.findById(userId);
+
+        if (!optionalUser.isPresent()) {
+
+            throw new UserNotFoundException("id-"+ userId);
+
+        }else {
+
+            Optional<Tag> optionalTag = tagService.findbyId(tagId);
+
+            if (!optionalTag.isPresent()) {
+
+                throw new TagNotFoundException("id-" + tagId);
+
+            }else {
+
+                if(optionalUser.get().getId().equals(optionalTag.get().getUser().getId())) {
+
+                    tagService.deleteById(tagId);
+
+                }else {
+
+                    throw new TagNotFoundException("No tag with id-" + tagId +
+                            " for user with id-" + userId);
+                }
+            }
+        }
     }
 
-    @PutMapping("/tags")
-    public void edit(@RequestBody Tag tag){
-        tagService.save(tag);
+    @PutMapping("/users/{userId}/tags")
+    public void edit(@RequestBody Tag tag,
+                     @PathVariable Long userId){
+
+        Optional<User> optionalUser = userService.findById(userId);
+
+        if (!optionalUser.isPresent()) {
+
+            throw new UserNotFoundException("id-" + userId);
+
+        }else {
+
+            tagService.save(tag);
+        }
+
     }
 
-    @PostMapping("/tags")
-    public ResponseEntity<Object> save(@RequestBody Tag tag) {
+    @PostMapping("/users/{userId}/tags")
+    public ResponseEntity<Object> save(@RequestBody Tag tag,
+                                       @PathVariable Long userId) {
 
-        tagService.save(tag);
+
+
+        Optional<User> optionalUser = userService.findById(userId);
+
+        if (!optionalUser.isPresent()) {
+
+            throw new UserNotFoundException("id-" + userId);
+
+        }else{
+
+            tagService.save(tag);
+        }
+
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()

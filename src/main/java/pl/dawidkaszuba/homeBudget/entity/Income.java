@@ -4,7 +4,6 @@ import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -19,7 +18,6 @@ public class Income {
     private BigDecimal amount;
     @NotNull
     private LocalDate incomeDate;
-    @Size(min = 2,message = "tag should have at least 2 signs")
     @NotNull
     @ApiModelProperty(notes = "tag should have at least 2 signs")
     @ManyToMany
