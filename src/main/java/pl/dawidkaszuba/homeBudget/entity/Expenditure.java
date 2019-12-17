@@ -15,6 +15,8 @@ public class Expenditure {
     private LocalDate expenditureDate;
     @ManyToMany
     private List<Tag> tags;
+    @ManyToOne
+    private PlannedCashFlow plannedCashFlow;
     private String note;
     @ManyToOne
     private User user;
@@ -69,5 +71,13 @@ public class Expenditure {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public PlannedCashFlow getPlannedCashFlow() {
+        return plannedCashFlow;
+    }
+
+    public void setPlannedCashFlow(PlannedCashFlow plannedCashFlow) {
+        this.plannedCashFlow = plannedCashFlow;
     }
 }

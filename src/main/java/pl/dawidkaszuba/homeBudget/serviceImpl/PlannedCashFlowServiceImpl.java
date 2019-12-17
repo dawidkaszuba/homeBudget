@@ -6,7 +6,7 @@ import pl.dawidkaszuba.homeBudget.entity.PlannedCashFlow;
 import pl.dawidkaszuba.homeBudget.repository.PlannedCashFlowRepository;
 import pl.dawidkaszuba.homeBudget.service.PlannedCashFlowService;
 
-import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,6 +39,11 @@ public class PlannedCashFlowServiceImpl implements PlannedCashFlowService {
     @Override
     public List<PlannedCashFlow> findAllByUserId(Long userId) {
         return plannedCashFlowRepository.findAllByUserId(userId);
+    }
+
+    @Override
+    public List<PlannedCashFlow> findAllByUserIdAndStartDateGreaterThanAndEndDateLessThan(Long userId, LocalDate startDateLocalDate, LocalDate endDateLocalDate) {
+        return plannedCashFlowRepository.findAllByUserIdAndStartDateGreaterThanAndEndDateLessThan(userId,startDateLocalDate,endDateLocalDate);
     }
 
 }

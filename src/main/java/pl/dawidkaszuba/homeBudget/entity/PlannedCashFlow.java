@@ -3,7 +3,6 @@ package pl.dawidkaszuba.homeBudget.entity;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 public class PlannedCashFlow {
@@ -13,10 +12,6 @@ public class PlannedCashFlow {
     private Long id;
     private String name;
     private String note;
-    @OneToMany
-    private List<Expenditure> expenditures;
-    @OneToMany
-    private List<Income> incomes;
     private BigDecimal currentSumAmount;
     private BigDecimal plannedAmount;
     private LocalDate startDate;
@@ -52,14 +47,6 @@ public class PlannedCashFlow {
 
     public void setNote(String note) {
         this.note = note;
-    }
-
-    public List<Expenditure> getExpenditures() {
-        return expenditures;
-    }
-
-    public void setExpenditures(List<Expenditure> expenditures) {
-        this.expenditures = expenditures;
     }
 
     public BigDecimal getCurrentSumAmount() {
@@ -108,13 +95,5 @@ public class PlannedCashFlow {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public List<Income> getIncomes() {
-        return incomes;
-    }
-
-    public void setIncomes(List<Income> incomes) {
-        this.incomes = incomes;
     }
 }

@@ -12,6 +12,7 @@ import pl.dawidkaszuba.homeBudget.service.PlannedCashFlowService;
 import pl.dawidkaszuba.homeBudget.service.UserService;
 
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +31,9 @@ public class PlannedCashFlowController {
 
 
     @GetMapping("/users/{userId}/plannedCashFlows")
-    public List<PlannedCashFlow> findAllByUser(@PathVariable Long userId){
+    public List<PlannedCashFlow> findAllByUser(@PathVariable Long userId,
+                                               @RequestParam(required = false) String startDate,
+                                               @RequestParam(required = false) String endDate){
 
         Optional<User> optionalUser = userService.findById(userId);
 
@@ -40,14 +43,27 @@ public class PlannedCashFlowController {
 
         }else{
 
-            return plannedCashFlowService.findAllByUserId(userId);
+            if(startDate == null || endDate == null){
+
+                return plannedCashFlowService.findAllByUserId(userId);
+
+            }else {
+
+                LocalDate startDateLocalDate = LocalDate.parse(startDate);
+                LocalDate endDateLocalDate = LocalDate.parse(endDate);
+
+                return plannedCashFlowService
+                        .findAllByUserIdAndStartDateGreaterThanAndEndDateLessThan(userId,
+                                                                                  startDateLocalDate,
+                                                                                  endDateLocalDate);
+            }
 
         }
     }
 
     @GetMapping("/users/{userId}/plannedCashFlows/{plannedCashFlowId}")
     public Optional<PlannedCashFlow> findByUserIdAndId(@PathVariable Long userId,
-                                                @PathVariable Long plannedCashFlowId) {
+                                                       @PathVariable Long plannedCashFlowId) {
 
         Optional<User> optionalUser = userService.findById(userId);
 
