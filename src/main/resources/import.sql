@@ -19,6 +19,9 @@ INSERT INTO expenditure(amount,expenditure_date,user_id) VALUES(24.56,'2019-11-1
 INSERT INTO expenditure(amount,expenditure_date,note,user_id) VALUES(99.99,'2019-11-10','jacket',1);
 INSERT INTO expenditure(amount,expenditure_date,note,user_id) VALUES(52.39,'2019-11-15','fruit for birthday',2);
 
+INSERT INTO expenditure(amount,expenditure_date,user_id) VALUES(90,'2019-12-12',1);
+INSERT INTO expenditure(amount,expenditure_date,user_id) VALUES(110,'2019-12-14',1);
+
 INSERT INTO income(amount,income_date,user_id) VALUES(2500.00,'2019-11-10',1);
 INSERT INTO income(amount,income_date,user_id) VALUES(2600.00,'2019-10-10',2);
 
@@ -29,3 +32,7 @@ INSERT into expenditure_tags(expenditure_id,tags_id) VALUES(3,1);
 INSERT into income_tags(income_id,tags_id) VALUES(1,5);
 INSERT into income_tags(income_id,tags_id) VALUES(2,5);
 
+
+INSERT into PLANNED_CASH_FLOW (CURRENT_SUM_AMOUNT,END_DATE,IS_SUM_AMOUNT_EXCEEDED,NOTE,PLANNED_AMOUNT,START_DATE,USER_ID) VALUES(200.00,'2019-12-31',false,'note1',300.00,'2019-12-01',1);
+INSERT into PLANNED_CASH_FLOW_EXPENDITURES(PLANNED_CASH_FLOW_ID,EXPENDITURES_ID) VALUES(1,4);
+INSERT into PLANNED_CASH_FLOW_EXPENDITURES(PLANNED_CASH_FLOW_ID,EXPENDITURES_ID) VALUES(1,5);

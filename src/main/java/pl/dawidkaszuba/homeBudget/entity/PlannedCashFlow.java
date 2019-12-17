@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-public class PlannedExpenditure {
+public class PlannedCashFlow {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,14 +15,18 @@ public class PlannedExpenditure {
     private String note;
     @OneToMany
     private List<Expenditure> expenditures;
+    @OneToMany
+    private List<Income> incomes;
     private BigDecimal currentSumAmount;
     private BigDecimal plannedAmount;
     private LocalDate startDate;
     private LocalDate endDate;
     private boolean isSumAmountExceeded;
+    @ManyToOne
+    private User user;
 
 
-    public PlannedExpenditure() {
+    public PlannedCashFlow() {
     }
 
 
@@ -96,5 +100,21 @@ public class PlannedExpenditure {
 
     public void setSumAmountExceeded(boolean sumAmountExceeded) {
         isSumAmountExceeded = sumAmountExceeded;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Income> getIncomes() {
+        return incomes;
+    }
+
+    public void setIncomes(List<Income> incomes) {
+        this.incomes = incomes;
     }
 }
