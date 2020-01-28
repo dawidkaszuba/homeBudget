@@ -13,4 +13,5 @@ public interface UserService  {
     Optional<User> findById(Long id);
     void deleteById(Long id);
     User save(User income);
+    User findByUserName(String userName);
 }

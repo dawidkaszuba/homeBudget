@@ -2,11 +2,9 @@ package pl.dawidkaszuba.homeBudget.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Entity
 public class User {
@@ -22,11 +20,19 @@ public class User {
     @JsonIgnore
     private String password;
 
-    @NotEmpty
     private String name;
+
+    @ManyToMany
+    private List<Role> roles;
 
 
     public User() {
+    }
+
+    public User(@NotEmpty String userName, @NotEmpty String password, List<Role> roles) {
+        this.userName = userName;
+        this.password = password;
+        this.roles = roles;
     }
 
     public Long getId() {
@@ -61,4 +67,7 @@ public class User {
         this.name = name;
     }
 
+    public List<Role> getRoles() {
+        return roles;
+    }
 }
