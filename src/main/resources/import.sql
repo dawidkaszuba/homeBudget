@@ -3,7 +3,7 @@ insert into user ( user_name, password, name) values ('minnie', '$2a$10$MnHcLn.X
 insert into user ( user_name, password, name) values ('donald', '$2a$10$0UCBI04PCXiK0pF/9kI7.uAXiHNQeeHdkv9NhA1/xgmRpfd4qxRMG', 'Donald');
 insert into user ( user_name, password, name) values ('daisy', '$2a$10$aNoR88g5b5TzSKb7mQ1nQOkyEwfHVQOxHY0HX7irI8qWINvLDWRyS', 'Daisy');
 insert into user ( user_name, password, name) values ( 'clarabelle', '$2a$10$cuTJd2ayEwXfsPdoF5/hde6gzsPx/gEiv8LZsjPN9VPoN5XVR8cKW', 'Clarabelle');
-insert into user ( user_name, password, name) values ('admin', '$2a$10$JQOfG5Tqnf97SbGcKsalz.XpDQbXi1APOf2SHPVW27bWNioi9nI8y', 'Super');
+insert into user ( user_name, password, name) values ('test', '$2y$12$iXXuH9qxndl69AFLezwwrO8lDZ/2K0GjilEUfUxTvj3u4YhPkTrfK', 'Super');
 
 
 INSERT INTO tag(name,user_id) VALUES('food',1);

@@ -2,10 +2,12 @@ package pl.dawidkaszuba.homeBudget.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.dawidkaszuba.homeBudget.app.configuration.JwtTokenUtil;
 import pl.dawidkaszuba.homeBudget.entity.User;
 import pl.dawidkaszuba.homeBudget.repository.UserRepository;
 import pl.dawidkaszuba.homeBudget.service.UserService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,10 +15,12 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final JwtTokenUtil jwtTokenUtil;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, JwtTokenUtil jwtTokenUtil) {
         this.userRepository = userRepository;
+        this.jwtTokenUtil = jwtTokenUtil;
     }
 
     @Override
@@ -39,7 +43,15 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
+    @Override
     public User findByUserName(String userName) {
         return userRepository.findByUserName(userName);
+    }
+
+    @Override
+    public boolean isCorrectUser(String userId, HttpServletRequest request) {
+        return findByUserName(jwtTokenUtil.
+                getUsernameFromToken(request.getHeader("authorization").
+                        substring(7))).getId().toString().equals(userId);
     }
 }
