@@ -9,35 +9,48 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import pl.dawidkaszuba.homeBudget.app.configuration.JwtTokenUtil;
+import pl.dawidkaszuba.homeBudget.entity.User;
 import pl.dawidkaszuba.homeBudget.model.JwtRequest;
-import pl.dawidkaszuba.homeBudget.model.JwtResponse;
+import pl.dawidkaszuba.homeBudget.model.LoggedUser;
 import pl.dawidkaszuba.homeBudget.model.UserDTO;
+import pl.dawidkaszuba.homeBudget.service.UserService;
 import pl.dawidkaszuba.homeBudget.serviceImpl.JwtUserDetailsService;
 
 @RestController
 @CrossOrigin
 public class AuthenticateController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+
+    private final AuthenticationManager authenticationManager;
+    private final JwtTokenUtil jwtTokenUtil;
+    private final JwtUserDetailsService userDetailsService;
+    private final UserService userService;
 
     @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    public AuthenticateController(AuthenticationManager authenticationManager,
+                                  JwtTokenUtil jwtTokenUtil,
+                                  JwtUserDetailsService userDetailsService,
+                                  UserService userService) {
 
-    @Autowired
-    private JwtUserDetailsService userDetailsService;
+        this.authenticationManager = authenticationManager;
+        this.jwtTokenUtil = jwtTokenUtil;
+        this.userDetailsService = userDetailsService;
+        this.userService = userService;
+    }
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
+    public LoggedUser createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
-        authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
-        final UserDetails userDetails = userDetailsService
-                .loadUserByUsername(authenticationRequest.getUsername());
+            authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
-        final String token = jwtTokenUtil.generateToken(userDetails);
+            final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 
-        return ResponseEntity.ok(new JwtResponse(token));
+            User user = userService.findByUserName(authenticationRequest.getUsername());
+
+            final String token = jwtTokenUtil.generateToken(userDetails);
+
+        return  new LoggedUser(user.getUserName(), user.getId(), token);
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
