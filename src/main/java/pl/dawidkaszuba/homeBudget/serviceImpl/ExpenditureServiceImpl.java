@@ -28,6 +28,9 @@ public class ExpenditureServiceImpl implements ExpenditureService {
 
     @Override
     public Expenditure save(Expenditure expenditure) {
+
+        LocalDate created = LocalDate.now();
+        expenditure.setExpenditureDate(created);
         return expenditureRepository.save(expenditure);
     }
 

@@ -1,12 +1,9 @@
 package pl.dawidkaszuba.homeBudget.entity;
 
-import io.swagger.annotations.ApiModelProperty;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 public class Income {
@@ -18,10 +15,8 @@ public class Income {
     private BigDecimal amount;
     @NotNull
     private LocalDate incomeDate;
-    @NotNull
-    @ApiModelProperty(notes = "tag should have at least 2 signs")
-    @ManyToMany
-    private List<Tag> tags;
+    @ManyToOne
+    private Tag tag;
     private String note;
     @ManyToOne
     private User user;
@@ -53,12 +48,12 @@ public class Income {
         this.incomeDate = incomeDate;
     }
 
-    public List<Tag> getTags() {
-        return tags;
+    public Tag getTag() {
+        return tag;
     }
 
-    public void setTags(List<Tag> tags) {
-        this.tags = tags;
+    public void setTag(Tag tag) {
+        this.tag = tag;
     }
 
     public String getNote() {
@@ -77,3 +72,4 @@ public class Income {
         this.user = user;
     }
 }
+

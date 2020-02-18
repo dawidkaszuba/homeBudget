@@ -3,7 +3,6 @@ package pl.dawidkaszuba.homeBudget.entity;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 public class Expenditure {
@@ -13,8 +12,8 @@ public class Expenditure {
     private Long id;
     private BigDecimal amount;
     private LocalDate expenditureDate;
-    @ManyToMany
-    private List<Tag> tags;
+    @ManyToOne
+    private Tag tag;
     @ManyToOne
     private PlannedCashFlow plannedCashFlow;
     private String note;
@@ -49,12 +48,20 @@ public class Expenditure {
         this.expenditureDate = expenditureDate;
     }
 
-    public List<Tag> getTags() {
-        return tags;
+    public Tag getTag() {
+        return tag;
     }
 
-    public void setTags(List<Tag> tags) {
-        this.tags = tags;
+    public void setTag(Tag tag) {
+        this.tag = tag;
+    }
+
+    public PlannedCashFlow getPlannedCashFlow() {
+        return plannedCashFlow;
+    }
+
+    public void setPlannedCashFlow(PlannedCashFlow plannedCashFlow) {
+        this.plannedCashFlow = plannedCashFlow;
     }
 
     public String getNote() {
@@ -71,13 +78,5 @@ public class Expenditure {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public PlannedCashFlow getPlannedCashFlow() {
-        return plannedCashFlow;
-    }
-
-    public void setPlannedCashFlow(PlannedCashFlow plannedCashFlow) {
-        this.plannedCashFlow = plannedCashFlow;
     }
 }
