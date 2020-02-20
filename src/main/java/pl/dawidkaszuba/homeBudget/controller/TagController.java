@@ -1,6 +1,7 @@
 package pl.dawidkaszuba.homeBudget.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +10,7 @@ import pl.dawidkaszuba.homeBudget.entity.Tag;
 import pl.dawidkaszuba.homeBudget.entity.User;
 import pl.dawidkaszuba.homeBudget.exception.TagNotFoundException;
 import pl.dawidkaszuba.homeBudget.exception.UserNotFoundException;
+import pl.dawidkaszuba.homeBudget.model.Kind;
 import pl.dawidkaszuba.homeBudget.service.TagService;
 import pl.dawidkaszuba.homeBudget.service.UserService;
 
@@ -30,7 +32,8 @@ public class TagController {
     }
 
     @GetMapping("/users/{userId}/tags")
-    public List<Tag> findAll(@PathVariable Long userId){
+    public List<Tag> findAll(@PathVariable Long userId,
+                             @Param("kind") String kind){
 
         Optional<User> optionalUser = userService.findById(userId);
 
@@ -39,8 +42,8 @@ public class TagController {
             throw new UserNotFoundException("id-" + userId);
 
         }else{
-
-            return tagService.findAllByUserId(userId);
+            Kind kindEnum = Kind.valueOf(kind);
+            return tagService.findAllByUserIdAndKind(userId,kindEnum);
         }
     }
 

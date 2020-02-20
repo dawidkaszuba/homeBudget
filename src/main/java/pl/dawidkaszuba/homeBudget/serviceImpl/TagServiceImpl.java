@@ -3,6 +3,7 @@ package pl.dawidkaszuba.homeBudget.serviceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.dawidkaszuba.homeBudget.entity.Tag;
+import pl.dawidkaszuba.homeBudget.model.Kind;
 import pl.dawidkaszuba.homeBudget.repository.TagRepository;
 import pl.dawidkaszuba.homeBudget.service.TagService;
 
@@ -26,8 +27,8 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public List<Tag> findAllByUserId(Long userId) {
-        return tagRepository.findByUserId(userId);
+    public List<Tag> findAllByUserIdAndKind(Long userId, Kind kind) {
+        return tagRepository.findByUserIdAndKind(userId,kind);
     }
 
     @Override

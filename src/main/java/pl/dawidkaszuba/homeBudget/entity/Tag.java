@@ -1,5 +1,7 @@
 package pl.dawidkaszuba.homeBudget.entity;
 
+import pl.dawidkaszuba.homeBudget.model.Kind;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,6 +13,9 @@ public class Tag {
     private String name;
     @ManyToOne
     private User user;
+    @Enumerated(EnumType.STRING)
+    private Kind kind;
+
 
 
     public Tag() {
@@ -40,4 +45,11 @@ public class Tag {
         this.user = user;
     }
 
+    public Kind getKind() {
+        return kind;
+    }
+
+    public void setKind(Kind kind) {
+        this.kind = kind;
+    }
 }

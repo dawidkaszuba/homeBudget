@@ -10,14 +10,13 @@ INSERT INTO income(amount,income_date,user_id) VALUES(2600.00,'2020-02-10',1);
 
 Insert into income(amount,income_date, user_id) values (5000.00, '2020-02-11',1);
 
-INSERT INTO tag(name,user_id) VALUES('food',1);
-INSERT INTO tag(name,user_id) VALUES('clothes',1);
-INSERT INTO tag(name,user_id) VALUES('bus tickets',1);
-INSERT INTO tag(name,user_id) VALUES('kindergarten',1);
-INSERT INTO tag(name,user_id) VALUES('salary',1);
-INSERT INTO tag(name,user_id) VALUES('my_salary',2);
-INSERT INTO tag(name,user_id) VALUES('petrol',2);
-
+INSERT INTO tag(name,user_id,kind) VALUES('food',1,'NEGATIVE');
+INSERT INTO tag(name,user_id,kind) VALUES('clothes',1,'NEGATIVE');
+INSERT INTO tag(name,user_id,kind) VALUES('bus tickets',1,'NEGATIVE');
+INSERT INTO tag(name,user_id,kind) VALUES('kindergarten',1,'NEGATIVE');
+INSERT INTO tag(name,user_id,kind) VALUES('salary',1,'POSITIVE');
+INSERT INTO tag(name,user_id,kind) VALUES('my_salary',2,'POSITIVE');
+INSERT INTO tag(name,user_id,kind) VALUES('petrol',2,'NEGATIVE');
 
 
 
