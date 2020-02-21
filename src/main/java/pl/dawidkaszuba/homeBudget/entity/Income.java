@@ -1,7 +1,6 @@
 package pl.dawidkaszuba.homeBudget.entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -11,9 +10,7 @@ public class Income {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
     private BigDecimal amount;
-    @NotNull
     private LocalDate incomeDate;
     @ManyToOne
     private Tag tag;

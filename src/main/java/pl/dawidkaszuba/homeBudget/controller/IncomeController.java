@@ -160,7 +160,7 @@ public class IncomeController {
 
         }else {
 
-            incomeService.save(income);
+            income.setUser(optionalUser.get());
         }
 
         URI location = ServletUriComponentsBuilder

@@ -54,6 +54,10 @@ public class IncomeServiceImpl implements IncomeService {
 
     @Override
     public Income save(Income income) {
+
+        LocalDate incomeDate = LocalDate.now();
+        income.setIncomeDate(incomeDate);
+
         incomeRepository.save(income);
         return incomeRepository.save(income);
     }
