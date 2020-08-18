@@ -7,9 +7,7 @@ public class JwtRequest {
     private String password;
 
 
-    public JwtRequest()
-    {
-
+    public JwtRequest() {
     }
 
     public JwtRequest(String username, String password) {

@@ -36,11 +36,8 @@ public class TagController {
                              @Param("kind") String kind){
 
         Optional<User> optionalUser = userService.findById(userId);
-
         if (!optionalUser.isPresent()) {
-
             throw new UserNotFoundException("id-" + userId);
-
         }else{
             Kind kindEnum = Kind.valueOf(kind);
             return tagService.findAllByUserIdAndKind(userId,kindEnum);
@@ -50,27 +47,17 @@ public class TagController {
     @GetMapping("/users/{userId}/tags/{tagId}")
     public Optional<Tag> findById(@PathVariable Long tagId,
                                   @PathVariable Long userId) {
-
         Optional<User> optionalUser = userService.findById(userId);
-
         if (!optionalUser.isPresent()) {
-
             throw new UserNotFoundException("id-" + userId);
         }else{
-
             Optional<Tag> optionalTag = tagService.findbyId(tagId);
-
             if(!optionalTag.isPresent()) {
-
                 throw new TagNotFoundException("id-" + tagId);
             }else{
-
                 if(optionalTag.get().getUser().getId().equals(optionalUser.get().getId())){
-
                     return tagService.findbyId(tagId);
-
                 }else {
-
                     throw new TagNotFoundException("No tag with id-" + tagId +
                             " for user with id-" + userId);
                 }
@@ -84,27 +71,16 @@ public class TagController {
                            @PathVariable Long userId){
 
         Optional<User> optionalUser = userService.findById(userId);
-
         if (!optionalUser.isPresent()) {
-
             throw new UserNotFoundException("id-"+ userId);
-
         }else {
-
             Optional<Tag> optionalTag = tagService.findbyId(tagId);
-
             if (!optionalTag.isPresent()) {
-
                 throw new TagNotFoundException("id-" + tagId);
-
             }else {
-
                 if(optionalUser.get().getId().equals(optionalTag.get().getUser().getId())) {
-
                     tagService.deleteById(tagId);
-
                 }else {
-
                     throw new TagNotFoundException("No tag with id-" + tagId +
                             " for user with id-" + userId);
                 }
@@ -117,35 +93,24 @@ public class TagController {
                      @PathVariable Long userId){
 
         Optional<User> optionalUser = userService.findById(userId);
-
         if (!optionalUser.isPresent()) {
-
             throw new UserNotFoundException("id-" + userId);
-
         }else {
-
             tagService.save(tag);
         }
-
     }
 
     @PostMapping("/users/{userId}/tags")
     public ResponseEntity<Object> save(@RequestBody Tag tag,
                                        @PathVariable Long userId) {
 
-
-
         Optional<User> optionalUser = userService.findById(userId);
-
         if (!optionalUser.isPresent()) {
-
             throw new UserNotFoundException("id-" + userId);
 
-        }else{
-
+        }else {
             tagService.save(tag);
         }
-
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -153,6 +118,5 @@ public class TagController {
                 .buildAndExpand(tagService.save(tag).getId()).toUri();
 
         return ResponseEntity.created(location).build();
-
     }
 }

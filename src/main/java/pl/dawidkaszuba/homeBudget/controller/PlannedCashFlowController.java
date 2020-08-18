@@ -36,28 +36,19 @@ public class PlannedCashFlowController {
                                                @RequestParam(required = false) String endDate){
 
         Optional<User> optionalUser = userService.findById(userId);
-
         if(!optionalUser.isPresent()) {
-
             throw new UserNotFoundException("id-" + userId);
-
         }else{
-
             if(startDate == null || endDate == null){
-
                 return plannedCashFlowService.findAllByUserId(userId);
-
             }else {
-
                 LocalDate startDateLocalDate = LocalDate.parse(startDate);
                 LocalDate endDateLocalDate = LocalDate.parse(endDate);
-
                 return plannedCashFlowService
                         .findAllByUserIdAndStartDateGreaterThanAndEndDateLessThan(userId,
                                                                                   startDateLocalDate,
                                                                                   endDateLocalDate);
             }
-
         }
     }
 
@@ -66,34 +57,22 @@ public class PlannedCashFlowController {
                                                        @PathVariable Long plannedCashFlowId) {
 
         Optional<User> optionalUser = userService.findById(userId);
-
         if(!optionalUser.isPresent()) {
-
             throw new UserNotFoundException("id-" + userId);
-
         }else {
 
             Optional<PlannedCashFlow> optionalPlannedCashFlow = plannedCashFlowService.findById(plannedCashFlowId);
-
             if(!optionalPlannedCashFlow.isPresent()) {
-
                 throw new PlannedCashFlowNotFoundException("id-" + plannedCashFlowId);
-
             }else {
-
                 if(optionalPlannedCashFlow.get().getUser().getId().equals(optionalUser.get().getId())){
-
                     return plannedCashFlowService.findById(plannedCashFlowId);
-
                 }else{
-
                     throw new PlannedCashFlowNotFoundException("No plannedCashFlow with id-" + plannedCashFlowId +
                             " for user with id-" + userId);
                 }
-
             }
         }
-
     }
 
 
@@ -102,16 +81,10 @@ public class PlannedCashFlowController {
                                        @PathVariable Long userId){
 
         Optional<User> optionalUser = userService.findById(userId);
-
         if(!optionalUser.isPresent()) {
-
             throw new UserNotFoundException("id-" + userId);
-
         }else{
-
-
             plannedCashFlowService.save(plannedCashFlow);
-
         }
 
         URI location = ServletUriComponentsBuilder
@@ -120,8 +93,6 @@ public class PlannedCashFlowController {
                 .buildAndExpand(plannedCashFlowService.save(plannedCashFlow).getId()).toUri();
 
         return ResponseEntity.created(location).build();
-
-
     }
 
     @PutMapping("/users/{userId}/plannedCashFlows")
@@ -129,16 +100,11 @@ public class PlannedCashFlowController {
                      @PathVariable Long userId){
 
         Optional<User> optionalUser = userService.findById(userId);
-
         if (!optionalUser.isPresent()) {
-
             throw new UserNotFoundException("id-" + userId);
-
         }else {
-
             plannedCashFlowService.save(plannedCashFlows);
         }
-
     }
 
     @DeleteMapping("/users/{userId}/plannedCashFlows/{plannedCashFlowId}")
@@ -146,25 +112,16 @@ public class PlannedCashFlowController {
                            @PathVariable Long userId){
 
         Optional<User> optionalUser = userService.findById(userId);
-
         if (!optionalUser.isPresent()) {
-
             throw new UserNotFoundException("id-"+ userId);
-
         }else {
 
             Optional<PlannedCashFlow> plannedCashFlow = plannedCashFlowService.findById(plannedCashFlowId);
-
             if (!plannedCashFlow.isPresent()) {
-
                 throw new PlannedCashFlowNotFoundException("id-" + plannedCashFlowId);
-
             }else {
-
                 if(optionalUser.get().getId().equals(plannedCashFlow.get().getUser().getId())) {
-
                     plannedCashFlowService.deleteById(plannedCashFlowId);
-
                 }else {
 
                     throw new PlannedCashFlowNotFoundException("No tag with id-" + plannedCashFlowId +

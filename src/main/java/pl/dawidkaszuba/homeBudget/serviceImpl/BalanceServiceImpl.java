@@ -32,15 +32,10 @@ public class BalanceServiceImpl implements BalanceService {
         BigDecimal expenditures = expenditureService.findSumAmountFromTo(userId,from,to);
 
         if(incomes == null )
-
             incomes = new BigDecimal(0.00);
-
         if(expenditures == null)
-
             expenditures = new BigDecimal(0.00);
-
-
-          balance.setValue(incomes.subtract(expenditures));
+        balance.setValue(incomes.subtract(expenditures));
 
         return balance;
     }

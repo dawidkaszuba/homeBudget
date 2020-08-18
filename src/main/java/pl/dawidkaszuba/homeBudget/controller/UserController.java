@@ -27,7 +27,6 @@ public class UserController {
 
     @GetMapping("/users")
     public List<User> findAll(){
-
         return userService.findAll();
     }
 
@@ -35,12 +34,9 @@ public class UserController {
     public Optional<User> findById(@PathVariable Long id){
 
         Optional<User> optionalUser = userService.findById(id);
-
         if(!optionalUser.isPresent()){
-
             throw new UserNotFoundException("id-" + id);
         }
-
         return userService.findById(id);
     }
 

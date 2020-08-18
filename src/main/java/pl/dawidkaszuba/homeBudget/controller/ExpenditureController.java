@@ -41,25 +41,16 @@ public class ExpenditureController {
         Optional<User> optionalUser = userService.findById(userId);
 
         if (!optionalUser.isPresent()) {
-
             throw new UserNotFoundException("id-"+userId);
-
         }else{
-
             if(from == null || to == null) {
-
                 return expenditureService.findAllByUserId(userId);
-
             }else {
-
                 LocalDate localDateFrom = LocalDate.parse(from);
                 LocalDate localDateTo = LocalDate.parse(to);
-
                 return expenditureService.findAllByUserIdAndExpenditureDateBetween(userId,localDateFrom,localDateTo);
             }
-
         }
-
     }
 
     @GetMapping("/users/{userId}/expenditures/tags/{tagId}")
@@ -69,11 +60,8 @@ public class ExpenditureController {
                                                 @PathVariable String userId){
 
         if(from == null || to == null){
-
             return expenditureService.findAllByTag(userId,tagId);
-
-        }else{
-
+        }else {
             return expenditureService.findAllByTagFromTo(userId,from,to,tagId);
         }
     }
@@ -83,36 +71,21 @@ public class ExpenditureController {
                                           @PathVariable Long userId) {
 
         Optional<User> optionalUser = userService.findById(userId);
-
         if (!optionalUser.isPresent()) {
-
             throw new UserNotFoundException("id-" + userId);
-
-        } else {
-
+        }else {
             Optional<Expenditure> optionalExpenditure = expenditureService.findById(expenditureId);
-
             if (!optionalExpenditure.isPresent()) {
-
                 throw new ExpenditureNotFoundException("id-" + expenditureId);
-
-            } else {
-
+            }else {
                 if (optionalExpenditure.get().getUser().getId().equals(optionalUser.get().getId())) {
-
                     return expenditureService.findById(expenditureId);
-
-                } else {
-
+                }else {
                     throw new ExpenditureNotFoundException("No expenditure with id-" + expenditureId +
                             " for user with id-" + userId);
                 }
-
             }
-
         }
-
-
     }
 
     @DeleteMapping("/users/{userId}/expenditures/{expenditureId}")
@@ -120,27 +93,16 @@ public class ExpenditureController {
                            @PathVariable Long userId){
 
         Optional<User> optionalUser = userService.findById(userId);
-
         if(!optionalUser.isPresent()) {
-
             throw new UserNotFoundException("id-" + userId);
-
         }else {
-
             Optional<Expenditure> optionalExpenditure = expenditureService.findById(expenditureId);
-
             if(!optionalExpenditure.isPresent()){
-
                 throw new ExpenditureNotFoundException("id-" + expenditureId);
-
             }else {
-
                 if(optionalExpenditure.get().getUser().getId().equals(optionalUser.get().getId())) {
-
                     expenditureService.deleteById(optionalExpenditure.get().getId());
-
                 }else {
-
                     throw new ExpenditureNotFoundException("No expenditures with id-" + expenditureId +
                             " for user with id-" + userId);
                 }
@@ -153,13 +115,9 @@ public class ExpenditureController {
                      @PathVariable Long userId){
 
         Optional<User> optionalUser = userService.findById(userId);
-
         if(!optionalUser.isPresent()){
-
             throw new UserNotFoundException("id-"+userId);
-
         }else{
-
             expenditureService.save(expenditure);
         }
     }
@@ -169,16 +127,11 @@ public class ExpenditureController {
                                        @PathVariable Long userId){
 
         Optional<User> optionalUser = userService.findById(userId);
-
         if(!optionalUser.isPresent()){
-
             throw new UserNotFoundException("id-" + userId);
-
         }else {
-
             expenditure.setUser(optionalUser.get());
         }
-
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -186,5 +139,4 @@ public class ExpenditureController {
 
         return ResponseEntity.created(location).build();
     }
-
 }

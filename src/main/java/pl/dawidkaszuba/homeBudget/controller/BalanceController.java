@@ -33,15 +33,9 @@ public class BalanceController {
                               @RequestParam String from,
                               @RequestParam String to,
                               HttpServletRequest request) {
-
-
-       if(userService.isCorrectUser(userId, request)){
-
-            return balanceService.getBalance(userId,from,to);
+        if(userService.isCorrectUser(userId, request)){
+           return balanceService.getBalance(userId,from,to);
         }
-
-        else throw new UserNotFoundException("userId from PathVariable do not match to current token");
+       else throw new UserNotFoundException("userId from PathVariable do not match to current token");
     }
-
-
 }

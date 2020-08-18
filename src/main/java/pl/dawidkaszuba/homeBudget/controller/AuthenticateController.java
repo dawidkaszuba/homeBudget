@@ -41,14 +41,13 @@ public class AuthenticateController {
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public LoggedUser createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
+        authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
-            authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 
-            final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+        User user = userService.findByUserName(authenticationRequest.getUsername());
 
-            User user = userService.findByUserName(authenticationRequest.getUsername());
-
-            final String token = jwtTokenUtil.generateToken(userDetails);
+        final String token = jwtTokenUtil.generateToken(userDetails);
 
         return new LoggedUser(user.getUserName(), user.getId(), token);
     }
