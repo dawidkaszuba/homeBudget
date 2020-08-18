@@ -80,7 +80,7 @@ org.h2.message.DbException: Wrong user name or password [28000-199]
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215)
-	at pl.dawidkaszuba.homeBudget.app.HomeBudgetApplication.main(HomeBudgetApplication.java:18)
+	at pl.dawidkaszuba.homeBudget.HomeBudgetApplication.main(HomeBudgetApplication.java:18)
 Caused by: org.h2.jdbc.JdbcSQLInvalidAuthorizationSpecException: Wrong user name or password [28000-199]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:459)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:427)
@@ -144,7 +144,7 @@ org.h2.message.DbException: Wrong user name or password [28000-199]
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215)
-	at pl.dawidkaszuba.homeBudget.app.HomeBudgetApplication.main(HomeBudgetApplication.java:18)
+	at pl.dawidkaszuba.homeBudget.HomeBudgetApplication.main(HomeBudgetApplication.java:18)
 Caused by: org.h2.jdbc.JdbcSQLInvalidAuthorizationSpecException: Wrong user name or password [28000-199]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:459)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:427)
@@ -208,7 +208,7 @@ org.h2.message.DbException: Wrong user name or password [28000-199]
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215)
-	at pl.dawidkaszuba.homeBudget.app.HomeBudgetApplication.main(HomeBudgetApplication.java:18)
+	at pl.dawidkaszuba.homeBudget.HomeBudgetApplication.main(HomeBudgetApplication.java:18)
 Caused by: org.h2.jdbc.JdbcSQLInvalidAuthorizationSpecException: Wrong user name or password [28000-199]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:459)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:427)
@@ -295,7 +295,7 @@ org.h2.message.DbException: Wrong user name or password [28000-199]
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215)
-	at pl.dawidkaszuba.homeBudget.app.HomeBudgetApplication.main(HomeBudgetApplication.java:18)
+	at pl.dawidkaszuba.homeBudget.HomeBudgetApplication.main(HomeBudgetApplication.java:18)
 Caused by: org.h2.jdbc.JdbcSQLInvalidAuthorizationSpecException: Wrong user name or password [28000-199]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:459)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:427)
@@ -359,7 +359,7 @@ org.h2.message.DbException: Wrong user name or password [28000-199]
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215)
-	at pl.dawidkaszuba.homeBudget.app.HomeBudgetApplication.main(HomeBudgetApplication.java:18)
+	at pl.dawidkaszuba.homeBudget.HomeBudgetApplication.main(HomeBudgetApplication.java:18)
 Caused by: org.h2.jdbc.JdbcSQLInvalidAuthorizationSpecException: Wrong user name or password [28000-199]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:459)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:427)
@@ -423,7 +423,7 @@ org.h2.message.DbException: Wrong user name or password [28000-199]
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215)
-	at pl.dawidkaszuba.homeBudget.app.HomeBudgetApplication.main(HomeBudgetApplication.java:18)
+	at pl.dawidkaszuba.homeBudget.HomeBudgetApplication.main(HomeBudgetApplication.java:18)
 Caused by: org.h2.jdbc.JdbcSQLInvalidAuthorizationSpecException: Wrong user name or password [28000-199]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:459)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:427)

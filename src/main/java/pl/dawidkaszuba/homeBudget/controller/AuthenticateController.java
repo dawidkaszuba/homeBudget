@@ -50,7 +50,7 @@ public class AuthenticateController {
 
             final String token = jwtTokenUtil.generateToken(userDetails);
 
-        return  new LoggedUser(user.getUserName(), user.getId(), token);
+        return new LoggedUser(user.getUserName(), user.getId(), token);
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)

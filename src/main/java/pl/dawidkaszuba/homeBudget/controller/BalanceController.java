@@ -29,7 +29,10 @@ public class BalanceController {
 
 
     @GetMapping("/users/{userId}/balance")
-    public Balance getBalance(@PathVariable String userId, @RequestParam String from, @RequestParam String to, HttpServletRequest request) {
+    public Balance getBalance(@PathVariable String userId,
+                              @RequestParam String from,
+                              @RequestParam String to,
+                              HttpServletRequest request) {
 
 
        if(userService.isCorrectUser(userId, request)){
