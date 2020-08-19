@@ -20,10 +20,8 @@ public class PlannedCashFlow {
     @ManyToOne
     private User user;
 
-
     public PlannedCashFlow() {
     }
-
 
     public Long getId() {
         return id;

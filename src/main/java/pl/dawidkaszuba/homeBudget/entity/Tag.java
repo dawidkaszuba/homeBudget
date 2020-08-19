@@ -16,8 +16,6 @@ public class Tag {
     @Enumerated(EnumType.STRING)
     private Kind kind;
 
-
-
     public Tag() {
     }
 

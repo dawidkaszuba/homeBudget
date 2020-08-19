@@ -13,7 +13,6 @@ import java.util.Optional;
 @Service
 public class PlannedCashFlowServiceImpl implements PlannedCashFlowService {
 
-
     private final PlannedCashFlowRepository plannedCashFlowRepository;
 
     @Autowired

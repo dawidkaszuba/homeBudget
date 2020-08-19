@@ -20,7 +20,6 @@ public class Expenditure {
     @ManyToOne
     private User user;
 
-
     public Expenditure() {
     }
 

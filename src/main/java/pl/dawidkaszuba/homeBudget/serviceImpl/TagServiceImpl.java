@@ -18,7 +18,6 @@ public class TagServiceImpl implements TagService {
     @Autowired
     public TagServiceImpl(TagRepository tagRepository){
         this.tagRepository = tagRepository;
-
     }
 
     @Override

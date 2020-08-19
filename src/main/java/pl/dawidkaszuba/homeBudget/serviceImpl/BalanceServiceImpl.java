@@ -12,7 +12,6 @@ import java.math.BigDecimal;
 @Service
 public class BalanceServiceImpl implements BalanceService {
 
-
     private final Balance balance;
     private final IncomeService incomeService;
     private final ExpenditureService expenditureService;
@@ -27,7 +26,6 @@ public class BalanceServiceImpl implements BalanceService {
     @Override
     public Balance getBalance(String userId, String from, String to) {
 
-
         BigDecimal incomes = incomeService.findSumAmountFromTo(userId,from,to);
         BigDecimal expenditures = expenditureService.findSumAmountFromTo(userId,from,to);
 
@@ -36,7 +34,6 @@ public class BalanceServiceImpl implements BalanceService {
         if(expenditures == null)
             expenditures = new BigDecimal(0.00);
         balance.setValue(incomes.subtract(expenditures));
-
         return balance;
     }
 }
