@@ -5,6 +5,10 @@ insert into user( user_name, password, name) values ('donald', '$2a$10$0UCBI04PC
 insert into user( user_name, password, name) values ('daisy', '$2a$10$aNoR88g5b5TzSKb7mQ1nQOkyEwfHVQOxHY0HX7irI8qWINvLDWRyS', 'Daisy');
 insert into user( user_name, password, name) values ( 'clarabelle', '$2a$10$cuTJd2ayEwXfsPdoF5/hde6gzsPx/gEiv8LZsjPN9VPoN5XVR8cKW', 'Clarabelle');
 
+INSERT INTO ROLE(id,name) VALUES (1, 'admin');
+INSERT INTO ROLE(id,name) VALUES (2, 'regular');
+
+
 INSERT INTO income(amount,income_date,user_id) VALUES(2500.00,'2020-02-10',1);
 INSERT INTO income(amount,income_date,user_id) VALUES(2600.00,'2020-02-10',1);
 
