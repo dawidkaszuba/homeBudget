@@ -21,7 +21,7 @@ INSERT INTO tag(name,user_id,kind) VALUES('kindergarten',1,'NEGATIVE');
 INSERT INTO tag(name,user_id,kind) VALUES('salary',1,'POSITIVE');
 INSERT INTO tag(name,user_id,kind) VALUES('my_salary',2,'POSITIVE');
 INSERT INTO tag(name,user_id,kind) VALUES('petrol',2,'NEGATIVE');
-
+INSERT INTO tag(name,user_id,kind) VALUES('salary2',1,'POSITIVE');
 
 
 INSERT INTO expenditure(amount,expenditure_date,user_id) VALUES(24.56,'2020-02-12',1);
@@ -29,7 +29,7 @@ INSERT INTO expenditure(amount,expenditure_date,note,user_id) VALUES(99.99,'2020
 INSERT INTO expenditure(amount,expenditure_date,note,user_id) VALUES(52.39,'2020-02-15','fruit for birthday',2);
 
 
---INSERT into PLANNED_CASH_FLOW (NAME,CURRENT_SUM_AMOUNT,END_DATE,IS_SUM_AMOUNT_EXCEEDED,NOTE,PLANNED_AMOUNT,START_DATE,USER_ID) VALUES('Petrol',200.00,'2020-02-29',false,'note1',300.00,'2020-02-01',1);
+INSERT into PLANNED_CASH_FLOW (NAME,CURRENT_SUM_AMOUNT,END_DATE,IS_SUM_AMOUNT_EXCEEDED,NOTE,PLANNED_AMOUNT,START_DATE,USER_ID) VALUES('Petrol',200.00,'2020-08-31',false,'note1',300.00,'2020-08-01',1);
 
 INSERT INTO expenditure(amount,expenditure_date,user_id,PLANNED_CASH_FLOW_ID ) VALUES(90,'2020-02-12',1,1);
 INSERT INTO expenditure(amount,expenditure_date,user_id,PLANNED_CASH_FLOW_ID ) VALUES(110,'2020-02-14',1,1);

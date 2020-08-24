@@ -6,13 +6,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.dawidkaszuba.homeBudget.entity.Expenditure;
+import pl.dawidkaszuba.homeBudget.entity.PlannedCashFlow;
 import pl.dawidkaszuba.homeBudget.entity.User;
 import pl.dawidkaszuba.homeBudget.exception.ExpenditureNotFoundException;
+import pl.dawidkaszuba.homeBudget.exception.PlannedCashFlowAmountExceededException;
 import pl.dawidkaszuba.homeBudget.exception.UserNotFoundException;
 import pl.dawidkaszuba.homeBudget.service.ExpenditureService;
+import pl.dawidkaszuba.homeBudget.service.PlannedCashFlowService;
 import pl.dawidkaszuba.homeBudget.service.UserService;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
@@ -25,12 +29,14 @@ public class ExpenditureController {
 
     private final ExpenditureService expenditureService;
     private final UserService userService;
+    private final PlannedCashFlowService plannedCashFlowService;
 
     @Autowired
     public ExpenditureController(ExpenditureService expenditureService,
-                                 UserService userService) {
+                                 UserService userService, PlannedCashFlowService plannedCashFlowService) {
         this.expenditureService = expenditureService;
         this.userService=userService;
+        this.plannedCashFlowService = plannedCashFlowService;
     }
 
     @GetMapping("/users/{userId}/expenditures")
@@ -132,6 +138,18 @@ public class ExpenditureController {
         }else {
             expenditure.setUser(optionalUser.get());
         }
+        Optional optionalPlannedCashFlow = plannedCashFlowService.findById(expenditure.getPlannedCashFlow().getId());
+        if(optionalPlannedCashFlow.isPresent()) {
+            PlannedCashFlow pcf = (PlannedCashFlow) optionalPlannedCashFlow.get();
+            if(pcf.getCurrentSumAmount().compareTo(pcf.getPlannedAmount()) > 0){
+                throw new PlannedCashFlowAmountExceededException("Expenditure amount is to high. Plan higher planned cash flow amount");
+            } else {
+                BigDecimal newPcfAmount = pcf.getCurrentSumAmount().add(expenditure.getAmount());
+                pcf.setCurrentSumAmount(newPcfAmount);
+                plannedCashFlowService.save(pcf);
+            }
+        }
+
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
