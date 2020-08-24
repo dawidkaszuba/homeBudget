@@ -141,7 +141,7 @@ public class ExpenditureController {
         Optional optionalPlannedCashFlow = plannedCashFlowService.findById(expenditure.getPlannedCashFlow().getId());
         if(optionalPlannedCashFlow.isPresent()) {
             PlannedCashFlow pcf = (PlannedCashFlow) optionalPlannedCashFlow.get();
-            if(pcf.getCurrentSumAmount().compareTo(pcf.getPlannedAmount()) > 0){
+            if(expenditure.getAmount().compareTo(pcf.getPlannedAmount().subtract(pcf.getCurrentSumAmount())) > 0){
                 throw new PlannedCashFlowAmountExceededException("Expenditure amount is to high. Plan higher planned cash flow amount");
             } else {
                 BigDecimal newPcfAmount = pcf.getCurrentSumAmount().add(expenditure.getAmount());
