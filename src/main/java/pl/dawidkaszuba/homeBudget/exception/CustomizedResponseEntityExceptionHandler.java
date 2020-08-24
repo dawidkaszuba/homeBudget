@@ -69,6 +69,17 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 
         return  new ResponseEntity(exceptionResponse, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(PlannedCashFlowAmountExceededException.class)
+    public final ResponseEntity<Object> handlePlannedCashFlowAmountExceededException(PlannedCashFlowAmountExceededException ex, WebRequest webRequest){
+
+        ExceptionResponse exceptionResponse =
+                new ExceptionResponse(new Date(),ex.getMessage(),webRequest.getDescription(false));
+
+        return  new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
                                                                   HttpHeaders headers, HttpStatus status,
