@@ -1,5 +1,7 @@
 package pl.dawidkaszuba.homeBudget.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,6 +22,7 @@ import pl.dawidkaszuba.homeBudget.serviceImpl.JwtUserDetailsService;
 @CrossOrigin
 public class AuthenticateController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticateController.class);
 
     private final AuthenticationManager authenticationManager;
     private final JwtTokenUtil jwtTokenUtil;
@@ -40,6 +43,8 @@ public class AuthenticateController {
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public LoggedUser createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
+
+        LOGGER.info("Authenticate: {}", authenticationRequest.toString());
 
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
