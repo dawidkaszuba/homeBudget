@@ -56,8 +56,9 @@ public class AuthenticateController {
 
         final String token = jwtTokenUtil.generateToken(userDetails);
         final Date expirationDate = jwtTokenUtil.getExpirationDateFromToken(token);
-
-        return new LoggedUser(user.getUserName(), user.getId(), token, expirationDate);
+        LoggedUser loggedUser = new LoggedUser(user.getUserName(), user.getId(), token, expirationDate);
+        LOGGER.info("AuthenticateResponse: {}", loggedUser.toString());
+        return loggedUser;
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
