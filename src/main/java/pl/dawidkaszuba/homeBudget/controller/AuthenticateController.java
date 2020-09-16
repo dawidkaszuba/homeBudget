@@ -18,6 +18,8 @@ import pl.dawidkaszuba.homeBudget.model.UserDTO;
 import pl.dawidkaszuba.homeBudget.service.UserService;
 import pl.dawidkaszuba.homeBudget.serviceImpl.JwtUserDetailsService;
 
+import java.util.Date;
+
 @RestController
 @CrossOrigin
 public class AuthenticateController {
@@ -53,15 +55,10 @@ public class AuthenticateController {
         User user = userService.findByUserName(authenticationRequest.getUsername());
 
         final String token = jwtTokenUtil.generateToken(userDetails);
-<<<<<<< Updated upstream
-
-        return new LoggedUser(user.getUserName(), user.getId(), token);
-=======
         final Date expirationDate = jwtTokenUtil.getExpirationDateFromToken(token);
         LoggedUser loggedUser = new LoggedUser(user.getUserName(), user.getId(), token, expirationDate);
         LOGGER.info("AuthenticateResponse: {}", loggedUser.toString());
         return loggedUser;
->>>>>>> Stashed changes
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)

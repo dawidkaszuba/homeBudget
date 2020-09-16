@@ -1,15 +1,19 @@
 package pl.dawidkaszuba.homeBudget.model;
 
+import java.util.Date;
+
 public class LoggedUser {
 
     private String userName;
     private Long id;
     private String token;
+    private Date expirationDate;
 
-    public LoggedUser(String userName, Long id, String token) {
+    public LoggedUser(String userName, Long id, String token, Date expirationDate) {
         this.userName = userName;
         this.id = id;
         this.token = token;
+        this.expirationDate = expirationDate;
     }
 
     public String getUserName() {
