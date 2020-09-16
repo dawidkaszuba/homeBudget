@@ -1,5 +1,7 @@
 package pl.dawidkaszuba.homeBudget.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,10 +18,13 @@ import pl.dawidkaszuba.homeBudget.model.UserDTO;
 import pl.dawidkaszuba.homeBudget.service.UserService;
 import pl.dawidkaszuba.homeBudget.serviceImpl.JwtUserDetailsService;
 
+import java.util.Date;
+
 @RestController
 @CrossOrigin
 public class AuthenticateController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticateController.class);
 
     private final AuthenticationManager authenticationManager;
     private final JwtTokenUtil jwtTokenUtil;
@@ -41,6 +46,8 @@ public class AuthenticateController {
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public LoggedUser createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
+        LOGGER.info("Authenticate: {}", authenticationRequest.toString());
+
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
@@ -48,8 +55,9 @@ public class AuthenticateController {
         User user = userService.findByUserName(authenticationRequest.getUsername());
 
         final String token = jwtTokenUtil.generateToken(userDetails);
+        final Date expirationDate = jwtTokenUtil.getExpirationDateFromToken(token);
 
-        return new LoggedUser(user.getUserName(), user.getId(), token);
+        return new LoggedUser(user.getUserName(), user.getId(), token, expirationDate);
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
