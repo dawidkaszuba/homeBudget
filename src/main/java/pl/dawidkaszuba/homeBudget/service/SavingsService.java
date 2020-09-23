@@ -1,6 +1,6 @@
 package pl.dawidkaszuba.homeBudget.service;
 
-import org.jvnet.hk2.annotations.Service;
+import org.springframework.stereotype.Service;
 import pl.dawidkaszuba.homeBudget.entity.Savings;
 
 @Service

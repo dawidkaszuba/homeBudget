@@ -8,6 +8,6 @@ import pl.dawidkaszuba.homeBudget.entity.Savings;
 @Repository
 public interface SavingsRepository extends JpaRepository<Savings, Long> {
 
-    @Query("SELECT s from Savings s where max(s.lastModificationDate) and s.user = ?1")
-    Savings getSavingsByUserAndMaxModificationDate(String userid);
+    @Query(value = "SELECT * from savings where user_id = ?1 order by LAST_MODIFICATION_DATE desc limit 1", nativeQuery = true)
+    Savings getSavingsByUserAndMaxModificationDate(String userId);
 }
