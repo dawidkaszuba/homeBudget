@@ -1,6 +1,7 @@
 package pl.dawidkaszuba.homeBudget.entity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -8,7 +9,7 @@ public class Savings {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Double amount;
+    private BigDecimal amount;
     private LocalDateTime lastModificationDate;
     @OneToOne
     private User user;
@@ -24,11 +25,11 @@ public class Savings {
         this.id = id;
     }
 
-    public Double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 

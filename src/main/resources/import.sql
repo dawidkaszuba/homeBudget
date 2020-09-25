@@ -37,6 +37,8 @@ INSERT INTO expenditure(amount,expenditure_date,user_id,PLANNED_CASH_FLOW_ID ) V
 INSERT INTO expenditure(amount,expenditure_date,user_id,PLANNED_CASH_FLOW_ID ) VALUES(110,'2020-09-14',1,1);
 
 INSERT INTO savings(amount,last_modification_date, user_id) VALUES(1000,'2020-09-01',1);
+INSERT INTO savings(amount,last_modification_date, user_id) VALUES(2000,'2020-08-01',1);
+
 
 
 

@@ -10,4 +10,5 @@ public interface SavingsRepository extends JpaRepository<Savings, Long> {
 
     @Query(value = "SELECT * from savings where user_id = ?1 order by LAST_MODIFICATION_DATE desc limit 1", nativeQuery = true)
     Savings getSavingsByUserAndMaxModificationDate(String userId);
+
 }
