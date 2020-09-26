@@ -13,6 +13,7 @@ import pl.dawidkaszuba.homeBudget.service.UserService;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -40,7 +41,6 @@ public class SavingsServiceImpl implements SavingsService {
     public Savings updateSavings(String userId, Savings savings) {
         User user;
         Optional<User> optionalUser = userService.findById(Long.parseLong(userId));
-
         if(optionalUser.isPresent()) {
             user = optionalUser.get();
         }else {
@@ -59,8 +59,7 @@ public class SavingsServiceImpl implements SavingsService {
         } else {
             newSavingsAmount = currentSavings.getAmount().subtract(savings.getAmount());
         }
-
-        currentSavings.setAmount(newSavingsAmount);
-        return this.savingsRepository.save(currentSavings);
+        Savings newSavingsRecord = new Savings(newSavingsAmount, LocalDateTime.now(),user);
+        return this.savingsRepository.save(newSavingsRecord);
     }
 }

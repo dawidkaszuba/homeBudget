@@ -17,6 +17,12 @@ public class Savings {
     public Savings() {
     }
 
+    public Savings(BigDecimal amount, LocalDateTime lastModificationDate, User user) {
+        this.amount = amount;
+        this.lastModificationDate = lastModificationDate;
+        this.user = user;
+    }
+
     public Long getId() {
         return id;
     }
