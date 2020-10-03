@@ -69,4 +69,14 @@ public class User {
     public List<Role> getRoles() {
         return roles;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", name='" + name + '\'' +
+                ", roles=" + roles +
+                '}';
+    }
 }

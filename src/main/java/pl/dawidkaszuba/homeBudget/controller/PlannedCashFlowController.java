@@ -1,5 +1,7 @@
 package pl.dawidkaszuba.homeBudget.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,8 @@ import java.util.Optional;
 @RestController
 public class PlannedCashFlowController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticateController.class);
+
     private final PlannedCashFlowService plannedCashFlowService;
     private final UserService userService;
 
@@ -34,20 +38,25 @@ public class PlannedCashFlowController {
     public List<PlannedCashFlow> findAllByUser(@PathVariable Long userId,
                                                @RequestParam(required = false) String startDate,
                                                @RequestParam(required = false) String endDate){
-
+        List<PlannedCashFlow> plannedCashFlow;
         Optional<User> optionalUser = userService.findById(userId);
         if(!optionalUser.isPresent()) {
             throw new UserNotFoundException("id-" + userId);
         }else{
             if(startDate == null || endDate == null){
-                return plannedCashFlowService.findAllByUserId(userId);
+                plannedCashFlow = plannedCashFlowService.findAllByUserId(userId);
+                LOGGER.info("PlannedCashFlow: getAllByUser {}", plannedCashFlow.toString());
+                return plannedCashFlow;
             }else {
                 LocalDate startDateLocalDate = LocalDate.parse(startDate);
                 LocalDate endDateLocalDate = LocalDate.parse(endDate);
-                return plannedCashFlowService
+
+                plannedCashFlow = plannedCashFlowService
                         .findAllByUserIdAndStartDateGreaterThanAndEndDateLessThan(userId,
-                                                                                  startDateLocalDate,
-                                                                                  endDateLocalDate);
+                                startDateLocalDate,
+                                endDateLocalDate);
+                LOGGER.info("PlannedCashFlow: getAllByUserWithTimeFrame {}", plannedCashFlow.toString());
+                return plannedCashFlow;
             }
         }
     }

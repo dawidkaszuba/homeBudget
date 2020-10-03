@@ -3,6 +3,8 @@ package pl.dawidkaszuba.homeBudget.entity;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class PlannedCashFlow {
@@ -93,5 +95,26 @@ public class PlannedCashFlow {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "PlannedCashFlow{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", note='" + note + '\'' +
+                ", currentSumAmount=" + currentSumAmount +
+                ", plannedAmount=" + plannedAmount +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", isSumAmountExceeded=" + isSumAmountExceeded +
+                ", user=" + user +
+                '}';
+    }
+
+    public String printPlannedCashFlowList(List<PlannedCashFlow> plannedCashFlowList) {
+        return plannedCashFlowList.stream()
+                .map(PlannedCashFlow::toString)
+                .collect(Collectors.joining());
     }
 }
